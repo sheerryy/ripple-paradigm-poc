@@ -2,9 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "A simple NodeJS Server.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node index.ts",
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "prestart": "yarn build",
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Shehryar Shoukat",
@@ -13,6 +16,7 @@
     "express": "^4.17.1",
     "socket.io": "^2.3.0",
     "ts-node": "^9.0.0",
+    "tslint": "^6.1.3",
     "typescript": "^4.0.2"
   },
   "devDependencies": {
