@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "rippple-server",
   "version": "1.0.0",
   "description": "A simple NodeJS Server.",
   "main": "dist/index.js",
@@ -29,6 +29,7 @@
     "@dtos": "dist/dtos",
     "@utils": "dist/utils",
     "@routes": "dist/routes",
-    "@modules": "dist/modules"
+    "@modules": "dist/modules",
+    "@middlewares": "dist/middlewares"
   }
 }

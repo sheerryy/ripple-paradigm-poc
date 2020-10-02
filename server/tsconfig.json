@@ -14,7 +14,8 @@
       "@dtos/*": ["dtos/*"],
       "@utils/*": ["utils/*"],
       "@routes/*": ["routes/*"],
-      "@modules/*": ["modules/*"]
+      "@modules/*": ["modules/*"],
+      "@middlewares": ["middlewares/index"]
     }
   },
   "exclude": ["node_modules", "lib"]
