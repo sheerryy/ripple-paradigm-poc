@@ -6,8 +6,10 @@
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
+    "build:dev": "tsc --watch",
     "prestart": "yarn build",
     "start": "node .",
+    "start:dev": "nodemon --inspect .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Shehryar Shoukat",
@@ -15,6 +17,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "module-alias": "^2.2.2",
+    "nodemon": "^2.0.4",
     "socket.io": "^2.3.0",
     "ts-node": "^9.0.0",
     "tslint": "^6.1.3",
