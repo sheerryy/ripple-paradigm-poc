@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 
 import { ErrorResponse } from "@utils/types";
 
@@ -68,7 +68,7 @@ export class ReportsController {
             });
         }
 
-        res.status(200).json({
+        res.status(201).json({
             data: response
         });
     };
@@ -99,7 +99,8 @@ export class ReportsController {
         }
 
         res.status(200).json({
-            message: 'report updated successfully.'
+            message: 'report updated successfully.',
+            data: report,
         });
     };
 
@@ -117,7 +118,7 @@ export class ReportsController {
             });
         }
 
-        res.status(200).json({
+        res.status(204).json({
             message: 'report deleted successfully.'
         });
     };
