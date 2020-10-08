@@ -9,30 +9,15 @@ class SocketIoMiddleware {
     this.socketServer = SocketIO(httpServer)
   }
 
-  responseEmitter(req: Request, res: Response, next: NextFunction) {
-    // req.on('end', (data: any) => {
-    //   if (['GET', 'POST', 'PATCH', 'DELETE'].includes(req.method)) {
-    //     res.json = (data2: any) => {
-    //       console.log(data2); return res.json.call(res, data2);
-    //     }
-    //   }
-    // });
-
-    // next()
-    try {
-      if (['GET', 'POST', 'PATCH', 'DELETE'].includes(req.method)) {
-        const oldJSON = res.json;
-        res.json = (data) => {
-          res.json = oldJSON;
-          console.log(data);
-          return oldJSON.call(res, data);
-        }
+  responseEmitter = (context: string) => (req: Request, res: Response, next: NextFunction) => {
+    res.on("finish", () => {
+      if (['POST', 'PATCH', 'DELETE'].indexOf(req.method) !== -1) {
+        console.log(`${req.method} request on ${context}`);
       }
-      next();
-    } catch (error) {
-      next(error);
-    }
+    });
+
+    next()
   }
-}
+};
 
 export default SocketIoMiddleware;
