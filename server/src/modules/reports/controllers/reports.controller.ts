@@ -89,7 +89,7 @@ export class ReportsController {
 
         const response: any = this.reportService.updateReport(Number(id), report);
 
-        if (response.errorCode) {
+        if (response?.errorCode) {
             const errorResponse = response as ErrorResponse;
 
             return res.status(errorResponse.status).json({
@@ -100,7 +100,7 @@ export class ReportsController {
 
         res.status(200).json({
             message: 'report updated successfully.',
-            data: report,
+            data: response,
         });
     };
 
