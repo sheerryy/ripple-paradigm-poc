@@ -40,7 +40,7 @@ export class ReportsService {
         return newReport;
     }
 
-    updateReport(id: number, report: Partial<Reports>): ErrorResponse | void {
+    updateReport(id: number, report: Partial<Reports>): Reports | ErrorResponse {
         const reportIndex = this.reports.findIndex((item) => item.id === id);
 
         if (reportIndex === -1) {
@@ -51,7 +51,9 @@ export class ReportsService {
             }
         }
 
-        this.reports[reportIndex] = {...this.reports[reportIndex], ...report };
+        this.reports[reportIndex] = {...this.reports[reportIndex], ...report, updatedAt: new Date() };
+
+        return this.reports[reportIndex];
     }
 
     deleteReport(id: number): ErrorResponse | void {
