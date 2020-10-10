@@ -1,6 +1,8 @@
 import SocketIO from 'socket.io';
-import {Server} from 'http';
-import {NextFunction, Request, Response} from "express";
+import { Server } from 'http';
+import { NextFunction, Request, Response } from "express";
+
+import {EmitterResponse, EmitterRequestMethod, DependentContexts} from '@utils/types'
 
 class SocketIoMiddleware {
   socketServer: SocketIO.Server;
@@ -9,7 +11,18 @@ class SocketIoMiddleware {
     this.socketServer = SocketIO(httpServer);
   }
 
+  socketEmitter = (context: string, response: EmitterResponse ) => {
+    this.socketServer.emit(`emitter/${context}`, response);
+  };
 
+  getEmitterResponse = (requestMethod: EmitterRequestMethod, id?: string): EmitterResponse => {
+    switch (requestMethod) {
+      case 'POST':
+        return { requestMethod };
+      default:
+        return { requestMethod, data: { id } };
+    }
+  };
 
   emitterMiddleware = (context: string) => (req: Request, res: Response, next: NextFunction) => {
     res.on("finish", () => {
@@ -22,20 +35,7 @@ class SocketIoMiddleware {
           return;
         }
 
-        switch (req.method) {
-          case 'POST':
-            this.socketServer.emit(`emitter/${context}`, req.method);
-            break;
-          case 'PUT':
-            this.socketServer.emit(`emitter/${context}`, `${req.method}_${req.params.id}`);
-            break;
-          case 'PATCH':
-            this.socketServer.emit(`emitter/${context}`, `${req.method}_${req.params.id}`);
-            break;
-          case 'DELETE':
-            this.socketServer.emit(`emitter/${context}`, `${req.method}_${req.params.id}`);
-            break;
-        }
+        this.socketEmitter(context, this.getEmitterResponse(req.method as EmitterRequestMethod, req.params?.id));
       }
     });
 
