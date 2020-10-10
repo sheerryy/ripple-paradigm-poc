@@ -9,7 +9,9 @@ class SocketIoMiddleware {
     this.socketServer = SocketIO(httpServer);
   }
 
-  responseEmitter = (context: string) => (req: Request, res: Response, next: NextFunction) => {
+
+
+  emitterMiddleware = (context: string) => (req: Request, res: Response, next: NextFunction) => {
     res.on("finish", () => {
       if (['POST', 'PUT', 'PATCH', 'DELETE'].indexOf(req.method) !== -1) {
         console.log(`${req.method} request on ${context}`);

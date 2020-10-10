@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
     res.send('<h1>Hello world</h1>');
 });
 
-app.use('/reports', socketMiddleWare.responseEmitter('reports'), ReporstRoute);
+app.use('/reports', socketMiddleWare.emitterMiddleware('reports'), ReporstRoute);
 
 const server = http.listen(PORT, () => {
     console.log(`App started on http://localhost:${PORT}`);
