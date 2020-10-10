@@ -2,6 +2,8 @@ export type DeepPartial<T> = {
     [P in keyof T]?: DeepPartial<T[P]>;
 };
 
+export type EmitterRequestMethod = 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
 export type ErrorResponse = {
     status: number;
 
@@ -10,4 +12,12 @@ export type ErrorResponse = {
     message: string;
 
     data?: object;
+}
+
+export type EmitterResponse = {
+    requestMethod: EmitterRequestMethod;
+
+    data?: {
+        id: string,
+    };
 }

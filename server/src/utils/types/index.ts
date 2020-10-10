@@ -1,1 +1,6 @@
-export { DeepPartial, ErrorResponse } from './types.utils';
+export {
+  DeepPartial,
+  ErrorResponse,
+  EmitterResponse,
+  EmitterRequestMethod,
+} from './types.utils';
