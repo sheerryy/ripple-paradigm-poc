@@ -13,6 +13,13 @@ class SocketIoMiddleware {
     res.on("finish", () => {
       if (['POST', 'PUT', 'PATCH', 'DELETE'].indexOf(req.method) !== -1) {
         console.log(`${req.method} request on ${context}`);
+
+        if ([200, 201, 204].indexOf(res.statusCode) === -1) {
+          next();
+
+          return;
+        }
+
         switch (req.method) {
           case 'POST':
             this.socketServer.emit(`emitter/${context}`, req.method);
