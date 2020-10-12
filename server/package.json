@@ -19,6 +19,7 @@
     "express": "^4.17.1",
     "module-alias": "^2.2.2",
     "nodemon": "^2.0.4",
+    "prettier": "^2.1.2",
     "socket.io": "^2.3.0",
     "ts-node": "^9.0.0",
     "tslint": "^6.1.3",
