@@ -21,3 +21,11 @@ export type EmitterResponse = {
         id: string,
     };
 }
+
+export type DependentContext = {
+    requestMethod: EmitterRequestMethod;
+
+    context: string;
+
+    id: string;
+}
