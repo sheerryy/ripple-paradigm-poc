@@ -1,8 +1,16 @@
 import SocketIO from 'socket.io';
 import { Server } from 'http';
-import { NextFunction, Request, Response } from "express";
+import {
+  Request,
+  Response,
+  NextFunction,
+} from "express";
 
-import {EmitterResponse, EmitterRequestMethod, DependentContexts} from '@utils/types'
+import {
+  EmitterResponse,
+  DependentContext,
+  EmitterRequestMethod,
+} from '@utils/types'
 
 class SocketIoMiddleware {
   socketServer: SocketIO.Server;
@@ -11,7 +19,7 @@ class SocketIoMiddleware {
     this.socketServer = SocketIO(httpServer);
   }
 
-  socketEmitter = (context: string, response: EmitterResponse ) => {
+  socketEmitter = (context: string, response: EmitterResponse) => {
     this.socketServer.emit(`emitter/${context}`, response);
   };
 
@@ -36,6 +44,15 @@ class SocketIoMiddleware {
         }
 
         this.socketEmitter(context, this.getEmitterResponse(req.method as EmitterRequestMethod, req.params?.id));
+
+        const dependentContexts: DependentContext[] = res.locals.dependentContexts;
+
+        for (const dependentContext of dependentContexts) {
+          this.socketEmitter(
+            dependentContext.context,
+            this.getEmitterResponse(dependentContext.requestMethod, dependentContext.id)
+          );
+        }
       }
     });
 
