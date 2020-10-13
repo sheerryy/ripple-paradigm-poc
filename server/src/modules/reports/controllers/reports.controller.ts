@@ -27,7 +27,7 @@ export class ReportsController {
         if(!response) {
             return res.status(404).json({
                 code: 'c-001-g-002',
-                message: 'report not found.'
+                message: 'Report not found.'
             });
         }
 
@@ -99,7 +99,7 @@ export class ReportsController {
         }
 
         res.status(200).json({
-            message: 'report updated successfully.',
+            message: 'Report updated successfully.',
             data: response,
         });
     };
@@ -119,7 +119,7 @@ export class ReportsController {
         }
 
         res.status(204).json({
-            message: 'report deleted successfully.'
+            message: 'Report deleted successfully.'
         });
     };
 }
