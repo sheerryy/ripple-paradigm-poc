@@ -10,6 +10,7 @@ import { ReporstRoute } from "./routes";
 const app: express.Application = express();
 const http = new Server(app);
 const PORT = process.env.PORT || 3001;
+const VERSION = '1.0.0';
 const socketMiddleWare = new SocketIoMiddleware(http);
 
 
@@ -17,7 +18,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.send('<h1>Hello world</h1>');
+    res.json({
+        app: 'ripple-server',
+        version: VERSION,
+    });
 });
 
 app.use('/reports', socketMiddleWare.emitterMiddleware('reports'), ReporstRoute);
