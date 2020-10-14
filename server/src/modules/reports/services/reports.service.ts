@@ -6,7 +6,7 @@ export class ReportsService {
     private reports: Reports[];
 
     constructor() {
-        this.reports = []
+        this.reports = [];
     }
 
     getReport(id: number): Reports | undefined {
@@ -19,19 +19,19 @@ export class ReportsService {
 
     createReport(report: Partial<Reports>): Reports | ErrorResponse {
         // TODO: move this part to joi validatation wwith custom error messages
-        if (!report.title || !report.data || !report.author) {
+        if (!report.title || !report.data) {
             return {
                 status: 400,
                 errorCode: 's-001-c-001',
-                message: 'title, author and data is required.'
-            }
+                message: 'Title and data is required.'
+            };
         }
 
         const newReport: Reports = {
             id: this.reports.length,
             title: report.title,
             data: report.data,
-            author: report.author,
+            authorId: report.authorId,
             createdAt: new Date(),
         };
 
@@ -48,7 +48,7 @@ export class ReportsService {
                 status: 404,
                 errorCode: 's-001-u-001',
                 message: 'Report not found.'
-            }
+            };
         }
 
         this.reports[reportIndex] = {...this.reports[reportIndex], ...report, updatedAt: new Date() };
@@ -64,7 +64,7 @@ export class ReportsService {
                 status: 404,
                 errorCode: 's-001-d-001',
                 message: 'Report not found.'
-            }
+            };
         }
 
         this.reports = this.reports.filter((report) => report.id !== id);
