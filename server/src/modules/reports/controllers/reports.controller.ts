@@ -4,12 +4,16 @@ import { ErrorResponse } from "@utils/types";
 
 import { Reports } from "../entities/reports";
 import { ReportsService } from "../services/reports.service";
+import {AuthorsService} from "@modules/authors";
+import {ReportsResponse, reportsToReportResponse} from "@dtos/index";
 
 export class ReportsController {
     reportService: ReportsService;
+    authorService: AuthorsService;
 
     constructor() {
         this.reportService = new ReportsService();
+        this.authorService = new AuthorsService();
     }
 
     getReport = (req: Request, res: Response) => {
@@ -31,31 +35,50 @@ export class ReportsController {
             });
         }
 
+        const data: ReportsResponse = reportsToReportResponse(response, this.authorService.getAuthor(response.authorId));
+
         res.status(200).json({
-            data: response
+            data
         });
-    };
+    }
 
     getReports = (req: Request, res: Response) => {
         const response = this.reportService.getReports();
 
+        const authors = this.authorService.getAuthorByIds(response.map((report) => report.id));
+
+        const data: ReportsResponse[] = response.map(
+          (report) => reportsToReportResponse(report, authors.find(
+            (author) => report.authorId === author.id)
+          )
+        );
+
         res.status(200).json({
-            data: response
+            data
         });
-    };
+    }
 
     createReport = (req: Request, res: Response) => {
         const {
             data,
             title,
-            author,
+            authorId,
         } = req.body;
 
         const report: Partial<Reports> = {
             title,
             data,
-            author
+            authorId,
         };
+
+        const author = this.authorService.getAuthor(report.authorId);
+
+        if (!author) {
+            return res.status(404).json({
+                errorCode: 'c-001-c-001',
+                message: 'Author not found.'
+            });
+        }
 
         const response: any = this.reportService.createReport(report);
 
@@ -68,24 +91,37 @@ export class ReportsController {
             });
         }
 
+        const reportsResponse: ReportsResponse = reportsToReportResponse(response, author);
+
         res.status(201).json({
-            data: response
+            data: reportsResponse
         });
-    };
+    }
 
     updateReport = (req: Request, res: Response) => {
         const { id } = req.params;
         const {
             data,
             title,
-            author,
+            authorId,
         } = req.body;
 
         const report: Partial<Reports> = {
             title,
             data,
-            author
+            authorId
         };
+
+        if (report.authorId) {
+            const author = this.authorService.getAuthor(report.authorId);
+
+            if (!author) {
+                return res.status(404).json({
+                    errorCode: 'c-001-u-001',
+                    message: 'Author not found.'
+                });
+            }
+        }
 
         const response: any = this.reportService.updateReport(Number(id), report);
 
@@ -102,7 +138,7 @@ export class ReportsController {
             message: 'Report updated successfully.',
             data: response,
         });
-    };
+    }
 
     deleteReport = (req: Request, res: Response) => {
         const { id } = req.params;
@@ -121,5 +157,5 @@ export class ReportsController {
         res.status(204).json({
             message: 'Report deleted successfully.'
         });
-    };
+    }
 }
