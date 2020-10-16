@@ -9,7 +9,7 @@ export interface Reports {
         paragraph: string;
     }[];
 
-    author: string;
+    authorId: number;
 
     createdAt: Date;
 
