@@ -1,19 +1,19 @@
 import { Request, Response } from 'express';
 
-import { ErrorResponse } from "@utils/types";
+import { ErrorResponse } from '@utils/types';
+import { AuthorsService } from '@modules/authors';
+import { ReportsResponse, reportsToReportResponse } from '@dtos/index';
 
-import { Reports } from "../entities/reports";
+import { Reports } from '../entities/reports';
 import { ReportsService } from "../services/reports.service";
-import {AuthorsService} from "@modules/authors";
-import {ReportsResponse, reportsToReportResponse} from "@dtos/index";
 
 export class ReportsController {
     reportService: ReportsService;
     authorService: AuthorsService;
 
     constructor() {
-        this.reportService = new ReportsService();
-        this.authorService = new AuthorsService();
+        this.reportService = ReportsService.getInstance();
+        this.authorService = AuthorsService.getInstance();
     }
 
     getReport = (req: Request, res: Response) => {

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
-import { ErrorResponse } from "@utils/types";
+import { ErrorResponse } from '@utils/types';
+import { AuthorsResponse, authorsToAuthorResponse } from '@dtos/index';
 
 import { Authors } from "../entities/authors";
 import { AuthorsService } from "../services/authors.service";
@@ -9,7 +10,7 @@ export class AuthorsController {
     authorsService: AuthorsService;
 
     constructor() {
-        this.authorsService = new AuthorsService();
+        this.authorsService = AuthorsService.getInstance();
     }
 
     getAuthor = (req: Request, res: Response) => {
@@ -31,16 +32,20 @@ export class AuthorsController {
             });
         }
 
+        const data: AuthorsResponse = authorsToAuthorResponse(response);
+
         res.status(200).json({
-            data: response
+            data
         });
     }
 
     getAuthors = (req: Request, res: Response) => {
         const response = this.authorsService.getAuthors();
 
+        const data: AuthorsResponse[] = response.map((author) => authorsToAuthorResponse(author));
+
         res.status(200).json({
-            data: response
+            data
         });
     }
 
@@ -60,8 +65,10 @@ export class AuthorsController {
             });
         }
 
+        const data: AuthorsResponse = authorsToAuthorResponse(response);
+
         res.status(201).json({
-            data: response
+            data
         });
     }
 
@@ -82,9 +89,11 @@ export class AuthorsController {
             });
         }
 
+        const data: AuthorsResponse = authorsToAuthorResponse(response);
+
         res.status(200).json({
             message: 'Author updated successfully.',
-            data: response,
+            data
         });
     }
 
