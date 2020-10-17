@@ -1,5 +1,7 @@
-import ReporstRoute from './reports/reports.route';
+import AuthorsRoute from './authors/authors.route';
+import ReportsRoute from './reports/reports.route';
 
 export {
-    ReporstRoute
-}
+    AuthorsRoute,
+    ReportsRoute
+};
