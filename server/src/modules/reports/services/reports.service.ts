@@ -3,10 +3,18 @@ import { ErrorResponse} from "@utils/types";
 import { Reports } from "../entities/reports";
 
 export class ReportsService {
+    private static instance: ReportsService;
     private reports: Reports[];
 
     constructor() {
-        this.reports = [];
+    }
+
+    static getInstance() {
+        if (!ReportsService.instance) {
+            ReportsService.instance = new ReportsService();
+            ReportsService.instance.reports = [];
+        }
+        return ReportsService.instance;
     }
 
     getReport(id: number): Reports | undefined {
