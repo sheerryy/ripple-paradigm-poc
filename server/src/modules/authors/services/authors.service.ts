@@ -3,10 +3,18 @@ import { ErrorResponse} from "@utils/types";
 import { Authors } from "../entities/authors";
 
 export class AuthorsService {
+    private static instance: AuthorsService;
     private authors: Authors[];
 
     constructor() {
-        this.authors = [];
+    }
+
+    static getInstance() {
+        if (!AuthorsService.instance) {
+            AuthorsService.instance = new AuthorsService();
+            AuthorsService.instance.authors = [];
+        }
+        return AuthorsService.instance;
     }
 
     getAuthor(id: number): Authors | undefined {
