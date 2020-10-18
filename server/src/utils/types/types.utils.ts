@@ -12,7 +12,7 @@ export type ErrorResponse = {
     message: string;
 
     data?: object;
-}
+};
 
 export type EmitterResponse = {
     requestMethod: EmitterRequestMethod;
@@ -20,7 +20,7 @@ export type EmitterResponse = {
     data?: {
         id: string,
     };
-}
+};
 
 export type DependentContext = {
     requestMethod: EmitterRequestMethod;
@@ -28,4 +28,4 @@ export type DependentContext = {
     context: string;
 
     id: string;
-}
+};
