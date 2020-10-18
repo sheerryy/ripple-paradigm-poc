@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
     "build": "tsc",
     "build:dev": "tsc --watch",
     "prestart": "yarn build",
