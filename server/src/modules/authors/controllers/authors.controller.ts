@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { ErrorResponse } from '@utils/types';
+import { DependentContext, ErrorResponse } from '@utils/types';
 import { AuthorsResponse, authorsToAuthorResponse } from '@dtos/index';
 
 import { Authors } from "../entities/authors";
@@ -91,6 +91,16 @@ export class AuthorsController {
 
         const data: AuthorsResponse = authorsToAuthorResponse(response);
 
+        const dependentContexts: DependentContext[] = [
+            {
+                id,
+                context: 'reports',
+                requestMethod: 'PUT',
+            }
+        ];
+
+        res.locals = { dependentContexts };
+
         res.status(200).json({
             message: 'Author updated successfully.',
             data
@@ -110,6 +120,16 @@ export class AuthorsController {
                 message: errorResponse.message
             });
         }
+
+        const dependentContext: DependentContext[] = [
+          {
+            id,
+            context: 'reports',
+            requestMethod: 'DELETE',
+          }
+        ];
+
+        res.locals = { dependentContext };
 
         res.status(204).json({
             message: 'Author deleted successfully.'
