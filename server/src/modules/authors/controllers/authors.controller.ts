@@ -94,7 +94,7 @@ export class AuthorsController {
         const dependentContexts: DependentContext[] = [
             {
                 id,
-                context: 'reports',
+                context: 'authors',
                 requestMethod: 'PUT',
             }
         ];
@@ -124,7 +124,7 @@ export class AuthorsController {
         const dependentContext: DependentContext[] = [
           {
             id,
-            context: 'reports',
+            context: 'authors',
             requestMethod: 'DELETE',
           }
         ];
