@@ -10,7 +10,7 @@ import {
   EmitterResponse,
   DependentContext,
   EmitterRequestMethod,
-} from '@utils/types'
+} from '@utils/types';
 
 class SocketIoMiddleware {
   socketServer: SocketIO.Server;
@@ -20,8 +20,8 @@ class SocketIoMiddleware {
   }
 
   socketEmitter = (context: string, response: EmitterResponse) => {
-    this.socketServer.emit(`emitter/${context}`, response);
-  };
+    this.socketServer.emit(`context/${context}`, response);
+  }
 
   getEmitterResponse = (requestMethod: EmitterRequestMethod, id?: string): EmitterResponse => {
     switch (requestMethod) {
@@ -30,7 +30,7 @@ class SocketIoMiddleware {
       default:
         return { requestMethod, data: { id } };
     }
-  };
+  }
 
   emitterMiddleware = (context: string) => (req: Request, res: Response, next: NextFunction) => {
     res.on("finish", () => {
@@ -45,7 +45,7 @@ class SocketIoMiddleware {
 
         this.socketEmitter(context, this.getEmitterResponse(req.method as EmitterRequestMethod, req.params?.id));
 
-        const dependentContexts: DependentContext[] = res.locals.dependentContexts;
+        const dependentContexts: DependentContext[] = res.locals.dependentContexts || [];
 
         for (const dependentContext of dependentContexts) {
           this.socketEmitter(
@@ -56,8 +56,8 @@ class SocketIoMiddleware {
       }
     });
 
-    next()
+    next();
   }
-};
+}
 
 export default SocketIoMiddleware;
