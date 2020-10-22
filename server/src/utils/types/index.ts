@@ -1,5 +1,4 @@
 export {
-  DeepPartial,
   ErrorResponse,
   EmitterResponse,
   DependentContext,
