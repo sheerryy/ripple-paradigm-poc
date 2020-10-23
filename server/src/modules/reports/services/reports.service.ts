@@ -17,7 +17,7 @@ export class ReportsService {
         return ReportsService.instance;
     }
 
-    getReport(id: number): Reports | undefined {
+    getReport(id: string): Reports | undefined {
         return this.reports.find((report) => report.id === id);
     }
 
@@ -36,7 +36,7 @@ export class ReportsService {
         }
 
         const newReport: Reports = {
-            id: this.reports.length,
+            id: this.reports.length.toString(),
             title: report.title,
             data: report.data,
             authorId: report.authorId,
@@ -48,7 +48,7 @@ export class ReportsService {
         return newReport;
     }
 
-    updateReport(id: number, report: Partial<Reports>): Reports | ErrorResponse {
+    updateReport(id: string, report: Partial<Reports>): Reports | ErrorResponse {
         const reportIndex = this.reports.findIndex((item) => item.id === id);
 
         if (reportIndex === -1) {
@@ -64,7 +64,7 @@ export class ReportsService {
         return this.reports[reportIndex];
     }
 
-    deleteReport(id: number): ErrorResponse | void {
+    deleteReport(id: string): ErrorResponse | void {
         const reportIndex = this.reports.findIndex((report) => report.id === id);
 
         if (reportIndex === -1) {

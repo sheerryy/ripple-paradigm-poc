@@ -1,5 +1,5 @@
 export interface Reports {
-    id: number;
+    id: string;
 
     title: string;
 
@@ -9,7 +9,7 @@ export interface Reports {
         paragraph: string;
     }[];
 
-    authorId: number;
+    authorId: string;
 
     createdAt: Date;
 

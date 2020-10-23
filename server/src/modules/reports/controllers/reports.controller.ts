@@ -26,7 +26,7 @@ export class ReportsController {
             });
         }
 
-        const response = this.reportService.getReport(Number(id));
+        const response = this.reportService.getReport(id);
 
         if(!response) {
             return res.status(404).json({
@@ -123,7 +123,7 @@ export class ReportsController {
             }
         }
 
-        const response: any = this.reportService.updateReport(Number(id), report);
+        const response: any = this.reportService.updateReport(id, report);
 
         if (response?.errorCode) {
             const errorResponse = response as ErrorResponse;
@@ -143,7 +143,7 @@ export class ReportsController {
     deleteReport = (req: Request, res: Response) => {
         const { id } = req.params;
 
-        const response: any = this.reportService.deleteReport(Number(id));
+        const response: any = this.reportService.deleteReport(id);
 
         if (response.errorCode) {
             const errorResponse = response as ErrorResponse;
