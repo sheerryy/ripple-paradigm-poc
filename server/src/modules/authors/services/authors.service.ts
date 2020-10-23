@@ -17,11 +17,11 @@ export class AuthorsService {
         return AuthorsService.instance;
     }
 
-    getAuthor(id: number): Authors | undefined {
+    getAuthor(id: string): Authors | undefined {
         return this.authors.find((author) => author.id === id);
     }
 
-    getAuthorByIds(ids: number[]): Authors[] {
+    getAuthorByIds(ids: string[]): Authors[] {
         return this.authors.filter((author) => ids.indexOf(author.id) !== -1);
     }
 
@@ -40,7 +40,7 @@ export class AuthorsService {
         }
 
         const newAuthor: Authors = {
-            id: this.authors.length,
+            id: this.authors.length.toString(),
             name: author.name,
             createdAt: new Date(),
         };
@@ -50,7 +50,7 @@ export class AuthorsService {
         return newAuthor;
     }
 
-    updateAuthor(id: number, author: Partial<Authors>): Authors | ErrorResponse {
+    updateAuthor(id: string, author: Partial<Authors>): Authors | ErrorResponse {
         const authorIndex = this.authors.findIndex((item) => item.id === id);
 
         if (authorIndex === -1) {
@@ -66,7 +66,7 @@ export class AuthorsService {
         return this.authors[authorIndex];
     }
 
-    deleteAuthor(id: number): ErrorResponse | void {
+    deleteAuthor(id: string): ErrorResponse | void {
         const authorIndex = this.authors.findIndex((author) => author.id === id);
 
         if (authorIndex === -1) {

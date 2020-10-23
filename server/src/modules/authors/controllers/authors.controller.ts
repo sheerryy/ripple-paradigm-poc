@@ -23,7 +23,7 @@ export class AuthorsController {
             });
         }
 
-        const response = this.authorsService.getAuthor(Number(id));
+        const response = this.authorsService.getAuthor(id);
 
         if(!response) {
             return res.status(404).json({
@@ -78,7 +78,7 @@ export class AuthorsController {
 
         const author: Partial<Authors> = { name };
 
-        const response: any = this.authorsService.updateAuthor(Number(id), author);
+        const response: any = this.authorsService.updateAuthor(id, author);
 
         if (response?.errorCode) {
             const errorResponse = response as ErrorResponse;
@@ -110,7 +110,7 @@ export class AuthorsController {
     deleteAuthor = (req: Request, res: Response) => {
         const { id } = req.params;
 
-        const response: any = this.authorsService.deleteAuthor(Number(id));
+        const response: any = this.authorsService.deleteAuthor(id);
 
         if (response.errorCode) {
             const errorResponse = response as ErrorResponse;
