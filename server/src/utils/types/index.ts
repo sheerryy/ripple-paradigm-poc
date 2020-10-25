@@ -7,4 +7,4 @@ export {
 } from './types.utils';
 
 // Common Functions
-export { mongoObjectId } from './object-id-generator.utils';
+export { mongoObjectId } from './mongodb-object-id.utils';
