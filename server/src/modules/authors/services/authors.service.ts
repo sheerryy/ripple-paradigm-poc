@@ -1,4 +1,4 @@
-import { ErrorResponse} from "@utils/types";
+import { ErrorResponse, mongoObjectId } from "@utils/types";
 
 import { Authors } from "../entities/authors";
 
@@ -40,7 +40,7 @@ export class AuthorsService {
         }
 
         const newAuthor: Authors = {
-            id: this.authors.length.toString(),
+            id: mongoObjectId(),
             name: author.name,
             createdAt: new Date(),
         };

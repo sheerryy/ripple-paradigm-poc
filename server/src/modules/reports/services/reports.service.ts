@@ -1,4 +1,4 @@
-import { ErrorResponse} from "@utils/types";
+import { ErrorResponse, mongoObjectId } from "@utils/types";
 
 import { Reports } from "../entities/reports";
 
@@ -36,7 +36,7 @@ export class ReportsService {
         }
 
         const newReport: Reports = {
-            id: this.reports.length.toString(),
+            id: mongoObjectId(),
             title: report.title,
             data: report.data,
             authorId: report.authorId,
