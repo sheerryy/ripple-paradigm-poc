@@ -1,8 +1,7 @@
 import axios from 'axios';
 import * as qs from 'querystring';
 
-
-const doGet = async (path: string, params = {}) => {
+export const doGet = async (path: string, params = {}) => {
   return axios({
     method: 'GET',
     headers: {
@@ -12,7 +11,7 @@ const doGet = async (path: string, params = {}) => {
   });
 };
 
-const doPost = async (path: string, body = {}, params = {}) => {
+export const doPost = async (path: string, body = {}, params = {}) => {
   return axios({
     method: 'POST',
     headers: {
@@ -23,7 +22,7 @@ const doPost = async (path: string, body = {}, params = {}) => {
   });
 };
 
-const doPut = async (path: string, body = {}, params = {}) => {
+export const doPut = async (path: string, body = {}, params = {}) => {
   return axios({
     method: 'PUT',
     headers: {
@@ -34,7 +33,7 @@ const doPut = async (path: string, body = {}, params = {}) => {
   });
 };
 
-const doDelete = async (path: string, params = {}) => {
+export const doDelete = async (path: string, params = {}) => {
   return axios({
     method: 'DELETE',
     headers: {
