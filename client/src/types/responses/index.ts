@@ -1,2 +1,2 @@
 // Error Response Types
-export type ApiResponse = import('./api-response.type').ApiResponse;
+export type ErrorResponse = import('./error-response.type').ErrorResponse;

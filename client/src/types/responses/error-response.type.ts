@@ -1,4 +1,4 @@
-export type ApiResponse = {
+export type ErrorResponse = {
   status: number;
 
   errorCode: string;
