@@ -12,11 +12,7 @@ export const doGet = async (path: string, params = {}): Promise<any | ErrorRespo
       url: `${path}?${qs.stringify(params)}`,
     });
 
-    if (response.status === 200) {
-      return response?.data?.data;
-    }
-
-    return response?.data as ErrorResponse;
+    return response?.data?.data;
   } catch (err) {
     console.log(err);
 
@@ -35,11 +31,7 @@ export const doPost = async (path: string, body = {}, params = {}) => {
       data: body,
     });
 
-    if (String(response.status).charAt(0) === '2') {
-      return response?.data?.data;
-    }
-
-    return response?.data as ErrorResponse;
+    return response?.data?.data;
   } catch (err) {
     console.log(err);
 
@@ -58,11 +50,7 @@ export const doPut = async (path: string, body = {}, params = {}) => {
       data: body,
     });
 
-    if (String(response.status).charAt(0) === '2') {
-      return response?.data?.data;
-    }
-
-    return response?.data as ErrorResponse;
+    return response?.data?.data;
   } catch (err) {
     console.log(err);
 
@@ -80,11 +68,7 @@ export const doDelete = async (path: string, params = {}) => {
       url: `${path}?${qs.stringify(params)}`,
     });
 
-    if (String(response.status).charAt(0) === '2') {
-      return response?.data?.data;
-    }
-
-    return response?.data as ErrorResponse;
+    return response?.data?.data;
   } catch (err) {
     console.log(err);
 
