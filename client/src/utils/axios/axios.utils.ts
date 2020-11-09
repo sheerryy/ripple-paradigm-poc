@@ -1,8 +1,8 @@
 import axios from 'axios';
 import * as qs from 'querystring';
-import {ErrorResponse} from "../../types/responses";
+import { AxiosUtilResponse, ErrorResponse } from "../../types/responses";
 
-export const doGet = async (path: string, params = {}): Promise<any | ErrorResponse> => {
+export const doGet = async (path: string, params = {}): Promise<AxiosUtilResponse> => {
   try {
     const response = await axios({
       method: 'GET',
@@ -12,15 +12,27 @@ export const doGet = async (path: string, params = {}): Promise<any | ErrorRespo
       url: `${path}?${qs.stringify(params)}`,
     });
 
-    return response?.data?.data;
+    const axoisResponse: AxiosUtilResponse = {
+      error: false,
+
+      data: response?.data?.data,
+    };
+
+    return axoisResponse;
   } catch (err) {
     console.log(err);
 
-    return err?.response?.data as ErrorResponse;
+    const axoisResponse: AxiosUtilResponse = {
+      error: true,
+
+      errorResponse: err?.response?.data as ErrorResponse,
+    };
+
+    return  axoisResponse;
   }
 };
 
-export const doPost = async (path: string, body = {}, params = {}) => {
+export const doPost = async (path: string, body = {}, params = {}): Promise<AxiosUtilResponse> => {
   try {
     const response = await axios({
       method: 'POST',
@@ -31,15 +43,27 @@ export const doPost = async (path: string, body = {}, params = {}) => {
       data: body,
     });
 
-    return response?.data?.data;
+    const axoisResponse: AxiosUtilResponse = {
+      error: false,
+
+      data: response?.data?.data,
+    };
+
+    return axoisResponse;
   } catch (err) {
     console.log(err);
 
-    return err?.response?.data as ErrorResponse;
+    const axoisResponse: AxiosUtilResponse = {
+      error: true,
+
+      errorResponse: err?.response?.data as ErrorResponse,
+    };
+
+    return  axoisResponse;
   }
 };
 
-export const doPut = async (path: string, body = {}, params = {}) => {
+export const doPut = async (path: string, body = {}, params = {}): Promise<AxiosUtilResponse> => {
   try {
     const response = await axios({
       method: 'PUT',
@@ -50,15 +74,27 @@ export const doPut = async (path: string, body = {}, params = {}) => {
       data: body,
     });
 
-    return response?.data?.data;
+    const axoisResponse: AxiosUtilResponse = {
+      error: false,
+
+      data: response?.data?.data,
+    };
+
+    return axoisResponse;
   } catch (err) {
     console.log(err);
 
-    return err?.response?.data as ErrorResponse;
+    const axoisResponse: AxiosUtilResponse = {
+      error: true,
+
+      errorResponse: err?.response?.data as ErrorResponse,
+    };
+
+    return  axoisResponse;
   }
 };
 
-export const doDelete = async (path: string, params = {}) => {
+export const doDelete = async (path: string, params = {}): Promise<AxiosUtilResponse> => {
   try {
     const response = await axios({
       method: 'DELETE',
@@ -68,11 +104,23 @@ export const doDelete = async (path: string, params = {}) => {
       url: `${path}?${qs.stringify(params)}`,
     });
 
-    return response?.data?.data;
+    const axoisResponse: AxiosUtilResponse = {
+      error: false,
+
+      data: response?.data?.data,
+    };
+
+    return axoisResponse;
   } catch (err) {
     console.log(err);
 
-    return err?.response?.data as ErrorResponse;
+    const axoisResponse: AxiosUtilResponse = {
+      error: true,
+
+      errorResponse: err?.response?.data as ErrorResponse,
+    };
+
+    return  axoisResponse;
   }
 };
 
