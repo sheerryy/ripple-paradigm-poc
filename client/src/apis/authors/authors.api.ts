@@ -6,12 +6,15 @@ import { getConfig } from "../../config";
 const config = getConfig();
 
 const getAuthors =  async (): Promise<AuthorsResponse[] | ErrorResponse> => {
-    let authors;
+    let authors: AuthorsResponse[];
 
-    try {
-      authors = await doGet(`${config.API_BASE_URL}authors/`)
-    } catch (err) {
-      console.log(err);
+    const response =  await doGet(`${config.API_BASE_URL}authors/`);
 
+    if (response.error) {
+      return response.errorResponse as ErrorResponse;
     }
-}
+
+    authors = response.data;
+
+    return authors;
+};
