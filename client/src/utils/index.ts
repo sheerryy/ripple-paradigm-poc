@@ -4,4 +4,4 @@ export {
   doPut,
   doPost,
   doDelete,
-} from './axios/axios.utils';
+} from './axios/axios-requests.utils';
