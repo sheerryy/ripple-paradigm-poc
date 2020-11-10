@@ -1,6 +1,6 @@
 import { AuthorsRequest, AuthorsResponse } from "../../types/dtos";
 import { ErrorResponse } from "../../types/responses";
-import {doGet, doPost} from "../../utils";
+import {doDelete, doGet, doPost, doPut} from "../../utils";
 import { getConfig } from "../../config";
 
 const config = getConfig();
@@ -45,4 +45,32 @@ const createAuthor =  async (authorDto: AuthorsRequest): Promise<AuthorsResponse
     author = { ...response.data };
 
     return author;
+};
+
+const updateAuthor =  async (id: string, authorDto: Partial<AuthorsRequest>): Promise<AuthorsResponse | ErrorResponse> => {
+  let author: AuthorsResponse;
+
+  const response =  await doPut( `${config.API_BASE_URL}authors/${id}`, authorDto);
+
+  if (response.error) {
+    return response.errorResponse as ErrorResponse;
+  }
+
+  author = { ...response.data };
+
+  return author;
+};
+
+const deleteAuthor =  async (id: string): Promise<AuthorsResponse | ErrorResponse> => {
+  let author: AuthorsResponse;
+
+  const response =  await doDelete( `${config.API_BASE_URL}authors/${id}`);
+
+  if (response.error) {
+    return response.errorResponse as ErrorResponse;
+  }
+
+  author = { ...response.data };
+
+  return author;
 };
