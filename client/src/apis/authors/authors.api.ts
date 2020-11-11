@@ -1,7 +1,8 @@
-import { AuthorsRequest, AuthorsResponse } from "../../types/dtos";
-import { ErrorResponse } from "../../types/responses";
-import {doDelete, doGet, doPost, doPut} from "../../utils";
 import { getConfig } from "../../config";
+import {doDelete, doGet, doPost, doPut} from "../../utils";
+
+import { ErrorResponse } from "../../types/responses";
+import { AuthorsRequest, AuthorsResponse } from "../../types/dtos";
 
 const config = getConfig();
 
@@ -36,7 +37,7 @@ const getAuthor =  async (id: string): Promise<AuthorsResponse | ErrorResponse> 
 const createAuthor =  async (authorDto: AuthorsRequest): Promise<AuthorsResponse | ErrorResponse> => {
     let author: AuthorsResponse;
 
-    const response =  await doPost( `${config.API_BASE_URL}authors`, authorDto);
+    const response =  await doPost( `${config.API_BASE_URL}authors/`, authorDto);
 
     if (response.error) {
         return response.errorResponse as ErrorResponse;
