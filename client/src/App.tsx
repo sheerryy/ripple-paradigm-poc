@@ -1,10 +1,15 @@
 import React from 'react';
+import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
+
 import logo from './logo.svg';
 import './App.css';
 
+const THEME = createMuiTheme();
+
 function App() {
   return (
-    <div className="App">
+    <MuiThemeProvider theme={THEME}>
+      <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -20,6 +25,7 @@ function App() {
         </a>
       </header>
     </div>
+    </MuiThemeProvider>
   );
 }
 
