@@ -3,7 +3,8 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  IconButton, withStyles,
+  IconButton,
+  withStyles,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
