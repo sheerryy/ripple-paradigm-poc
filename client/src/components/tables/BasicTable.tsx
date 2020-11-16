@@ -7,6 +7,7 @@ import {
   TableBody,
   TableCell,
   withStyles,
+  Typography,
   TableContainer,
 } from '@material-ui/core';
 
@@ -15,7 +16,9 @@ import { BasicTableStyle } from './BasicTable.style';
 
 interface PropTypes {
   classes: {
-    table: string
+    tableRoot: string,
+    table: string,
+    tableTitle: string,
   }
 }
 
@@ -33,7 +36,11 @@ const rows = [
 
 function BasicTable({ classes }: PropTypes) {
   return (
-    <TableContainer component={Paper}>
+    <div className={classes.tableRoot}>
+      <Typography className={classes.tableTitle} variant="h5" align="left">
+        Table Title
+      </Typography>
+      <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -59,6 +66,7 @@ function BasicTable({ classes }: PropTypes) {
         </TableBody>
       </Table>
     </TableContainer>
+    </div>
   );
 }
 
