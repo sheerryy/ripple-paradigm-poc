@@ -8,13 +8,12 @@ export class AuthorsService {
     private authors: Authors[];
 
     constructor() {
-        this.authors = authorsData;
     }
 
     static getInstance() {
         if (!AuthorsService.instance) {
             AuthorsService.instance = new AuthorsService();
-            AuthorsService.instance.authors = [];
+            AuthorsService.instance.authors = authorsData;
         }
         return AuthorsService.instance;
     }

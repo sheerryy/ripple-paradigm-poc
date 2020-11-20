@@ -16,4 +16,4 @@ export const authorsData: Authors[] = [
     name: 'Author 3',
     createdAt: new Date(),
   },
-]
+];

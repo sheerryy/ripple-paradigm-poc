@@ -1,6 +1,7 @@
 import { ErrorResponse, mongoObjectId } from "@utils/types";
 
 import { Reports } from "../entities/reports";
+import { reportsData } from "./reports.data";
 
 export class ReportsService {
     private static instance: ReportsService;
@@ -12,7 +13,7 @@ export class ReportsService {
     static getInstance() {
         if (!ReportsService.instance) {
             ReportsService.instance = new ReportsService();
-            ReportsService.instance.reports = [];
+            ReportsService.instance.reports = reportsData;
         }
         return ReportsService.instance;
     }
