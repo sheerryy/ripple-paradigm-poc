@@ -45,7 +45,7 @@ export class ReportsController {
     getReports = (req: Request, res: Response) => {
         const response = this.reportService.getReports();
 
-        const authors = this.authorService.getAuthorByIds(response.map((report) => report.id));
+        const authors = this.authorService.getAuthorByIds(response.map((report) => report.authorId));
 
         const data: ReportsResponse[] = response.map(
           (report) => reportsToReportResponse(report, authors.find(
