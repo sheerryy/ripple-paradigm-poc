@@ -1,12 +1,14 @@
 import { ErrorResponse, mongoObjectId } from "@utils/types";
 
 import { Authors } from "../entities/authors";
+import { authorsData } from "./authors.data";
 
 export class AuthorsService {
     private static instance: AuthorsService;
     private authors: Authors[];
 
     constructor() {
+        this.authors = authorsData;
     }
 
     static getInstance() {
