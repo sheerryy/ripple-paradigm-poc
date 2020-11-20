@@ -1,5 +1,5 @@
 export type AuthorsResponse = {
-  id: number;
+  id: string;
 
   name: string;
 };

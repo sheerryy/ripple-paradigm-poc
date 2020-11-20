@@ -1,7 +1,7 @@
 import { AuthorsResponse } from '../authors/authors.response.dto';
 
 export type ReportsResponse = {
-  id: number;
+  id: string;
 
   title: string;
 
