@@ -6,7 +6,7 @@ import { AuthorsRequest, AuthorsResponse } from "../../types/dtos";
 
 const config = getConfig();
 
-const getAuthors =  async (): Promise<AuthorsResponse[] | ErrorResponse> => {
+export const getAuthors =  async (): Promise<AuthorsResponse[] | ErrorResponse> => {
     let authors: AuthorsResponse[];
 
     const response =  await doGet(`${config.API_BASE_URL}authors/`);
@@ -20,7 +20,7 @@ const getAuthors =  async (): Promise<AuthorsResponse[] | ErrorResponse> => {
     return authors;
 };
 
-const getAuthor =  async (id: string): Promise<AuthorsResponse | ErrorResponse> => {
+export const getAuthor =  async (id: string): Promise<AuthorsResponse | ErrorResponse> => {
     let author: AuthorsResponse;
 
     const response =  await doGet( `${config.API_BASE_URL}authors/${id}`);
@@ -34,7 +34,7 @@ const getAuthor =  async (id: string): Promise<AuthorsResponse | ErrorResponse> 
     return author;
 };
 
-const createAuthor =  async (authorDto: AuthorsRequest): Promise<AuthorsResponse | ErrorResponse> => {
+export const createAuthor =  async (authorDto: AuthorsRequest): Promise<AuthorsResponse | ErrorResponse> => {
     let author: AuthorsResponse;
 
     const response =  await doPost( `${config.API_BASE_URL}authors/`, authorDto);
@@ -48,7 +48,7 @@ const createAuthor =  async (authorDto: AuthorsRequest): Promise<AuthorsResponse
     return author;
 };
 
-const updateAuthor =  async (id: string, authorDto: Partial<AuthorsRequest>): Promise<AuthorsResponse | ErrorResponse> => {
+export const updateAuthor =  async (id: string, authorDto: Partial<AuthorsRequest>): Promise<AuthorsResponse | ErrorResponse> => {
   let author: AuthorsResponse;
 
   const response =  await doPut( `${config.API_BASE_URL}authors/${id}`, authorDto);
