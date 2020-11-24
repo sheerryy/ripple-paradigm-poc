@@ -1,5 +1,6 @@
 import { Server } from 'http';
 import express from 'express';
+import cors from "cors";
 import 'module-alias/register';
 import bodyParser from "body-parser";
 
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 3001;
 const VERSION = '1.0.0';
 const socketMiddleWare = new SocketIoMiddleware(http);
 
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
