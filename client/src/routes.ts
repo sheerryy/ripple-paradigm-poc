@@ -8,13 +8,13 @@ import {
 
 export const routes: Routes[] = [
   {
+    path: '/author',
+    component: AuthorView,
+  },
+  {
     path: '/*',
     exact: false,
     component: HomeView,
-  },
-  {
-    path: '/author',
-    component: AuthorView,
   }
 ]
 
