@@ -15,20 +15,16 @@ function AuthorTable(){
       if (result.errorCode) {
         console.log(result.message)
       } else {
-        debugger
         setAuthors(result);
       }
     };
 
     fetchData();
-  }, [])
-
-  useEffect(() => {
-    console.log(authors);
-  }, [authors])
+  }, []);
 
   return authors?.length ?
     <BasicTable
+      title="Authors"
       tableHeadings={Object.keys(authors[0])}
       tableData={authors.map((author) => Object.values(author))}
     /> :
