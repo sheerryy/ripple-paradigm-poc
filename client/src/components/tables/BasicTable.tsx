@@ -39,7 +39,7 @@ function BasicTable({ classes, tableHeadings = [], tableData }: PropTypes) {
         <TableBody>
           {tableData.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
-              {row.map((cell, cellIndex) => <TableCell key={cellIndex}>{row}</TableCell>)}
+              {row.map((cell, cellIndex) => <TableCell key={cellIndex}>{cell}</TableCell>)}
             </TableRow>
           ))}
         </TableBody>
