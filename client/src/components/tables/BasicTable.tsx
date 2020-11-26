@@ -19,15 +19,16 @@ interface PropTypes {
     table: string,
     tableTitle: string,
   },
+  title: string,
   tableHeadings: string[],
   tableData: string[][]
 }
 
-function BasicTable({ classes, tableHeadings = [], tableData }: PropTypes) {
+function BasicTable({ classes, title, tableHeadings = [], tableData }: PropTypes) {
   return (
     <div className={classes.tableRoot}>
       <Typography className={classes.tableTitle} variant="h5" align="left">
-        Table Title
+        {title}
       </Typography>
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
