@@ -15,7 +15,7 @@ export const getAuthors =  async (): Promise<AuthorsResponse[] | ErrorResponse> 
       return response.errorResponse as ErrorResponse;
     }
 
-    authors = { ...response.data };
+    authors = response.data;
 
     return authors;
 };
