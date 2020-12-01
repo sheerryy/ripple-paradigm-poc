@@ -1,4 +1,5 @@
-export const snakeCaseToNormal = (snakeCase: string): string => {
-  const result: string = snakeCase.replace(/([A-Z])/g, " $1");
-  return result.charAt(0).toUpperCase() + result.slice(1);
+export const camelCaseToNormal = (camelCase: string): string => {
+  return camelCase.replace(/^[a-z]|[A-Z]/g, (charValue, index) => {
+    return index === 0 ? charValue.toUpperCase() : ` ${charValue.toLowerCase()}`;
+  });
 };

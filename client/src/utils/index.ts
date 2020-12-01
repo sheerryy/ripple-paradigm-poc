@@ -8,5 +8,5 @@ export {
 
 // common utils
 export {
-  snakeCaseToNormal
+  camelCaseToNormal
 } from './common/common.utils'
