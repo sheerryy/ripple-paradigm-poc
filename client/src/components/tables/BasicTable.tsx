@@ -10,6 +10,7 @@ import {
   Typography,
   TableContainer,
 } from '@material-ui/core';
+import { EditOutlined, RemoveCircleOutlined } from '@material-ui/icons';
 
 import { BasicTableStyle } from './BasicTable.style';
 
@@ -20,11 +21,16 @@ interface PropTypes {
     tableTitle: string,
   },
   title: string,
+  actions: {
+    action: boolean,
+    editAction?: boolean
+    deleteAction?: boolean,
+  },
   tableHeadings: string[],
   tableData: string[][]
 }
 
-function BasicTable({ classes, title, tableHeadings = [], tableData }: PropTypes) {
+function BasicTable({ classes, title, actions = { action: false }, tableHeadings = [], tableData }: PropTypes) {
   return (
     <div className={classes.tableRoot}>
       <Typography className={classes.tableTitle} variant="h5" align="left">
@@ -36,11 +42,24 @@ function BasicTable({ classes, title, tableHeadings = [], tableData }: PropTypes
           <TableRow>
             {tableHeadings.map((heading, headinIndex) => <TableCell key={headinIndex}>{heading}</TableCell>)}
           </TableRow>
+          {
+            actions?.action && <TableRow>Actions</TableRow>
+          }
         </TableHead>
         <TableBody>
           {tableData.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
               {row.map((cell, cellIndex) => <TableCell key={cellIndex}>{cell}</TableCell>)}
+              {actions.action &&
+                <TableCell key={`action-${rowIndex}`}>
+                  { actions.editAction &&
+                    <EditOutlined />
+                  }
+                  { actions.deleteAction &&
+                    <RemoveCircleOutlined />
+                  }
+                </TableCell>
+              }
             </TableRow>
           ))}
         </TableBody>
