@@ -1,3 +1,5 @@
-import Origin from './BasicTable';
+import BasicTable from './basic-table';
 
-export default Origin;
+export {
+  BasicTable
+}
