@@ -8,6 +8,7 @@ import {
   TableCell,
   withStyles,
   Typography,
+  IconButton,
   TableContainer,
 } from '@material-ui/core';
 import { EditOutlined, RemoveCircleOutlined } from '@material-ui/icons';
@@ -23,8 +24,10 @@ interface PropTypes {
   title: string,
   actions: {
     action: boolean,
-    editAction?: boolean
+    editAction?: boolean,
+    handleEdit?: () => void,
     deleteAction?: boolean,
+    handleDelete?: () => void,
   },
   tableHeadings: string[],
   tableData: string[][]
@@ -41,10 +44,10 @@ function BasicTable({ classes, title, actions = { action: false }, tableHeadings
         <TableHead>
           <TableRow>
             {tableHeadings.map((heading, headinIndex) => <TableCell key={headinIndex}>{heading}</TableCell>)}
+            {
+              actions?.action && <TableCell>Actions</TableCell>
+            }
           </TableRow>
-          {
-            actions?.action && <TableRow>Actions</TableRow>
-          }
         </TableHead>
         <TableBody>
           {tableData.map((row, rowIndex) => (
@@ -53,10 +56,14 @@ function BasicTable({ classes, title, actions = { action: false }, tableHeadings
               {actions.action &&
                 <TableCell key={`action-${rowIndex}`}>
                   { actions.editAction &&
+                  <IconButton onClick={actions.handleEdit} aria-label="edit">
                     <EditOutlined />
+                  </IconButton>
                   }
                   { actions.deleteAction &&
+                  <IconButton onClick={actions.handleDelete} aria-label="delete">
                     <RemoveCircleOutlined />
+                  </IconButton>
                   }
                 </TableCell>
               }
