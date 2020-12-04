@@ -25,15 +25,38 @@ interface PropTypes {
   actions: {
     action: boolean,
     editAction?: boolean,
-    handleEdit?: () => void,
+    handleEdit?: (id: string) => void,
     deleteAction?: boolean,
-    handleDelete?: () => void,
+    handleDelete?: (id:string) => void,
   },
   tableHeadings: string[],
-  tableData: string[][]
+  tableData: string[][],
+  tableDataIds: string[],
 }
 
-function BasicTable({ classes, title, actions = { action: false }, tableHeadings = [], tableData }: PropTypes) {
+function BasicTable({
+  classes,
+  title,
+  actions = { action: false },
+  tableHeadings = [],
+  tableData,
+  tableDataIds,
+}: PropTypes) {
+  const handleOnclick = (eventAction: 'edit' | 'delete') => (id: string) => {
+    switch (eventAction) {
+      case "edit":
+        if (actions.handleEdit) {
+          actions.handleEdit(id);
+        }
+        break;
+      case "delete":
+        if (actions.handleDelete) {
+          actions.handleDelete(id);
+        }
+        break;
+    }
+  }
+
   return (
     <div className={classes.tableRoot}>
       <Typography className={classes.tableTitle} variant="h5" align="left">
@@ -56,12 +79,18 @@ function BasicTable({ classes, title, actions = { action: false }, tableHeadings
               {actions.action &&
                 <TableCell key={`action-${rowIndex}`}>
                   { actions.editAction &&
-                  <IconButton onClick={actions.handleEdit} aria-label="edit">
+                  <IconButton
+                    aria-label="edit"
+                    onClick={() => handleOnclick('edit')(tableDataIds[rowIndex])}
+                  >
                     <EditOutlined />
                   </IconButton>
                   }
                   { actions.deleteAction &&
-                  <IconButton onClick={actions.handleDelete} aria-label="delete">
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleOnclick('delete')(tableDataIds[rowIndex])}
+                  >
                     <RemoveCircleOutlined />
                   </IconButton>
                   }
