@@ -19,14 +19,14 @@ function SaveAuthorForm(){
     message: '',
   })
 
-  const handleChange = (property: string) => (event: InputEvent) => {
+  const handleChange = (property: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuthor((authorState) => ({
       ...authorState,
       [property]: event?.target?.value,
     }));
   };
 
-  const HandleAddAuthor = () => {
+  const HandleAddAuthor = async () => {
     if (!author.name) {
       setError({
         error: true,
