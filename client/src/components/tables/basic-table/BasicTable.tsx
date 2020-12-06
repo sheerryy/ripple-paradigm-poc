@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Grid,
   Paper,
   Table,
   TableRow,
@@ -11,7 +12,11 @@ import {
   IconButton,
   TableContainer,
 } from '@material-ui/core';
-import { EditOutlined, RemoveCircleOutlined } from '@material-ui/icons';
+import {
+  EditOutlined,
+  RemoveCircleOutlined,
+  AddCircleOutlined,
+} from '@material-ui/icons';
 
 import { BasicTableStyle } from './BasicTable.style';
 
@@ -24,6 +29,8 @@ interface PropTypes {
   title: string,
   actions: {
     action: boolean,
+    allowCreate: boolean,
+    handleCreate?: () => void,
     editAction?: boolean,
     handleEdit?: (id: string) => void,
     deleteAction?: boolean,
@@ -37,21 +44,32 @@ interface PropTypes {
 function BasicTable({
   classes,
   title,
-  actions = { action: false },
+  actions = { action: false, allowCreate: false },
   tableHeadings = [],
   tableData,
   tableDataIds,
 }: PropTypes) {
-  const handleOnclick = (eventAction: 'edit' | 'delete') => (id: string) => {
+  const handleOnclick = (eventAction: 'create' | 'edit' | 'delete') => (id?: string) => {
     switch (eventAction) {
-      case "edit":
-        if (actions.handleEdit) {
-          actions.handleEdit(id);
+      case 'create':
+        if (actions.handleCreate) {
+          actions.handleCreate();
+        } else {
+          console.warn(`${title} Table create handler is not provided`);
         }
         break;
-      case "delete":
-        if (actions.handleDelete) {
+      case 'edit':
+        if (id && actions.handleEdit) {
+          actions.handleEdit(id);
+        } else {
+          console.warn(`${title} Table edit handler is not provided`);
+        }
+        break;
+      case 'delete':
+        if (id && actions.handleDelete) {
           actions.handleDelete(id);
+        } else {
+          console.warn(`${title} Table delete handler is not provided`);
         }
         break;
     }
@@ -59,9 +77,23 @@ function BasicTable({
 
   return (
     <div className={classes.tableRoot}>
-      <Typography className={classes.tableTitle} variant="h5" align="left">
-        {title}
-      </Typography>
+      <Grid container>
+        <Grid xs={actions.allowCreate ? 9 : 12}>
+          <Typography className={classes.tableTitle} variant="h5" align="left">
+            {title}
+          </Typography>
+        </Grid>
+        {actions.allowCreate ?
+          <Grid xs={3}>
+            <IconButton
+              aria-label="create"
+              onClick={() => handleOnclick('create')()}
+            >
+              <AddCircleOutlined />
+            </IconButton>
+          </Grid> :
+          <></>}
+      </Grid>
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
