@@ -3,13 +3,17 @@ import {
   Grid,
   Button,
   TextField,
-  Typography,
+  Typography, Paper,
 } from "@material-ui/core";
 
 import {createAuthor } from "../../../apis/authors/authors.api";
 import { AuthorsRequest } from "../../../types/dtos";
 
-function SaveAuthorForm(){
+interface PropTypes {
+  handleClose: () => void,
+}
+
+function SaveAuthorForm({ handleClose }: PropTypes){
   const [author, setAuthor] = useState<AuthorsRequest>({
     name: ''
   });
@@ -32,11 +36,12 @@ function SaveAuthorForm(){
         error: true,
         message: 'Author name is required.'
       });
+      return ;
     } else {
       setError({
         error: false,
         message: ''
-      })
+      });
     }
 
     const response: any = await createAuthor(author);
@@ -47,34 +52,41 @@ function SaveAuthorForm(){
         message: response.message,
       })
     } else {
-      //closeModal(); or return author
+      handleClose();
     }
 
   }
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Typography variant="h3">Add Author</Typography>
+    <Paper>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="h3">Add Author</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <form noValidate autoComplete="off">
+            <TextField
+              variant="filled"
+              error={error.error}
+              id="filled-basic"
+              label="Author Name"
+              helperText={error.message}
+              onChange={handleChange('name')}
+            />
+          </form>
+        </Grid>
+        <Grid xs={6}>
+          <Button onClick={HandleAddAuthor} variant="contained" color="primary">
+            Add
+          </Button>
+        </Grid>
+        <Grid xs={6}>
+          <Button onClick={handleClose} variant="contained" color="secondary">
+            Cancel
+          </Button>
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <form noValidate autoComplete="off">
-          <TextField
-            variant="filled"
-            error={error.error}
-            id="filled-basic"
-            label="Author Name"
-            helperText={error.message}
-            onChange={handleChange('name')}
-          />
-        </form>
-      </Grid>
-      <Grid>
-        <Button variant="contained" color="primary">
-          Add
-        </Button>
-      </Grid>
-    </Grid>
+    </Paper>
   );
 }
 
