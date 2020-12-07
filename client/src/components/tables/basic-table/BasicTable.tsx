@@ -8,6 +8,7 @@ import {
   TableBody,
   TableCell,
   withStyles,
+  WithStyles,
   Typography,
   IconButton,
   TableContainer,
@@ -20,12 +21,7 @@ import {
 
 import { BasicTableStyle } from './BasicTable.style';
 
-interface PropTypes {
-  classes: {
-    tableRoot: string,
-    table: string,
-    tableTitle: string,
-  },
+interface PropTypes extends WithStyles<typeof BasicTableStyle> {
   title: string,
   actions: {
     action: boolean,

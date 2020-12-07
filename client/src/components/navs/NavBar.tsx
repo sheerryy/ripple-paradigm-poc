@@ -5,17 +5,13 @@ import {
   Typography,
   IconButton,
   withStyles,
+  WithStyles,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import { NavBarStyle } from './NavBar.style';
 
-interface PropTypes {
-  classes: {
-    title: string
-    navRoot: string,
-    menuButton: string,
-  }
+interface PropTypes extends WithStyles<typeof NavBarStyle> {
 }
 
 function NavBar({ classes }: PropTypes) {
