@@ -3,17 +3,19 @@ import {
   Grid,
   Button,
   TextField,
-  Typography, Paper,
-} from "@material-ui/core";
+  withStyles,
+  WithStyles,
+} from '@material-ui/core';
 
-import {createAuthor } from "../../../apis/authors/authors.api";
-import { AuthorsRequest } from "../../../types/dtos";
+import { createAuthor } from '../../../apis/authors/authors.api';
+import { AuthorsRequest } from '../../../types/dtos';
+import { SaveAuthorFormStyle } from './SaveAuthorForm.style';
 
-interface PropTypes {
+interface PropTypes extends WithStyles<typeof SaveAuthorFormStyle> {
   handleClose: () => void,
 }
 
-function SaveAuthorForm({ handleClose }: PropTypes){
+function SaveAuthorForm({ handleClose, classes }: PropTypes){
   const [author, setAuthor] = useState<AuthorsRequest>({
     name: ''
   });
@@ -58,33 +60,41 @@ function SaveAuthorForm({ handleClose }: PropTypes){
   }
 
   return (
-    <Paper>
       <Grid container>
         <Grid item xs={12}>
           <form noValidate autoComplete="off">
             <TextField
+              className={classes.textField}
               variant="filled"
               error={error.error}
               id="filled-basic"
               label="Author Name"
+              fullWidth={true}
               helperText={error.message}
               onChange={handleChange('name')}
             />
           </form>
         </Grid>
-        <Grid xs={6}>
-          <Button onClick={HandleAddAuthor} variant="contained" color="primary">
+        <Grid className={classes.buttonContainer} xs={6}>
+          <Button
+            className={classes.button}
+            onClick={HandleAddAuthor}
+            variant="contained"
+            color="primary">
             Add
           </Button>
         </Grid>
-        <Grid xs={6}>
-          <Button onClick={handleClose} variant="contained" color="secondary">
+        <Grid className={classes.buttonContainer} xs={6}>
+          <Button
+            className={classes.button}
+            onClick={handleClose}
+            variant="contained"
+            color="secondary">
             Cancel
           </Button>
         </Grid>
       </Grid>
-    </Paper>
   );
 }
 
-export default SaveAuthorForm;
+export default withStyles(SaveAuthorFormStyle, { withTheme: true })(SaveAuthorForm);
