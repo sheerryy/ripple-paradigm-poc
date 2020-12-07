@@ -59,10 +59,7 @@ function SaveAuthorForm({ handleClose }: PropTypes){
 
   return (
     <Paper>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Typography variant="h3">Add Author</Typography>
-        </Grid>
+      <Grid container>
         <Grid item xs={12}>
           <form noValidate autoComplete="off">
             <TextField
