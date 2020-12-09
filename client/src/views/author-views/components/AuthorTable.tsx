@@ -24,6 +24,15 @@ function AuthorTable(){
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (selectedAuthor) {
+      setSaveAuthorModal({
+        open: true,
+        title: `Save Author: ${selectedAuthor?.id}`
+      })
+    }
+  }, [selectedAuthor]);
+
   const fetchData = async () => {
     const result: any = await getAuthors();
 
@@ -45,8 +54,7 @@ function AuthorTable(){
 
   const handleEditAction = (id: string) => {
     console.log(`edit: ${id}`);
-    // setSelectedAuthor(authors.find((author) => author.id === id));
-    // setEditAuthorModal(true);
+    setSelectedAuthor(authors.find((author) => author.id === id));
   }
 
   const handleDeleteAction = (id: string) => {
@@ -85,7 +93,7 @@ function AuthorTable(){
       >
         <DialogTitle id="alert-dialog-title">{saveAuthorModal.title}</DialogTitle>
         <DialogContent>
-          <SaveAuthorForm handleClose={handleAuthorDialogClose}/>
+          <SaveAuthorForm author={selectedAuthor} handleClose={handleAuthorDialogClose}/>
         </DialogContent>
       </Dialog>
     </div>
