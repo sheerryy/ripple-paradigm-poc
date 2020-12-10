@@ -62,7 +62,7 @@ export const updateAuthor =  async (id: string, authorDto: Partial<AuthorsReques
   return author;
 };
 
-const deleteAuthor =  async (id: string): Promise<AuthorsResponse | ErrorResponse> => {
+export const deleteAuthor =  async (id: string): Promise<AuthorsResponse | ErrorResponse> => {
   let author: AuthorsResponse;
 
   const response =  await doDelete( `${config.API_BASE_URL}authors/${id}`);
