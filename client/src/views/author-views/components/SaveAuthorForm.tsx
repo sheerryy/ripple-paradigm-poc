@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Grid,
   Button,
@@ -7,23 +7,36 @@ import {
   WithStyles,
 } from '@material-ui/core';
 
-import { createAuthor } from '../../../apis/authors/authors.api';
-import { AuthorsRequest } from '../../../types/dtos';
+import {createAuthor, updateAuthor} from '../../../apis/authors/authors.api';
+import { AuthorsRequest, AuthorsResponse } from '../../../types/dtos';
 import { SaveAuthorFormStyle } from './SaveAuthorForm.style';
 
 interface PropTypes extends WithStyles<typeof SaveAuthorFormStyle> {
   handleClose: () => void,
+  author?: AuthorsResponse,
 }
 
-function SaveAuthorForm({ handleClose, classes }: PropTypes){
+function SaveAuthorForm({
+  classes,
+  handleClose,
+  author: propAuthor
+}: PropTypes){
   const [author, setAuthor] = useState<AuthorsRequest>({
     name: ''
   });
+  const [isEditMod, setIsEditMod] = useState<boolean>(false);
 
   const [error, setError] = useState<{ error: boolean, message: string}>({
     error: false,
     message: '',
-  })
+  });
+
+  useEffect(() => {
+    if(propAuthor?.id) {
+      setIsEditMod(true);
+      setAuthor(propAuthor);
+    }
+  }, []);
 
   const handleChange = (property: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuthor((authorState) => ({
@@ -32,7 +45,7 @@ function SaveAuthorForm({ handleClose, classes }: PropTypes){
     }));
   };
 
-  const HandleAddAuthor = async () => {
+  const HandleSaveAuthor = async () => {
     if (!author.name) {
       setError({
         error: true,
@@ -46,7 +59,13 @@ function SaveAuthorForm({ handleClose, classes }: PropTypes){
       });
     }
 
-    const response: any = await createAuthor(author);
+    let response: any;
+
+    if (isEditMod && propAuthor?.id) {
+      response = await updateAuthor(propAuthor.id, author)
+    } else {
+      response = await createAuthor(author);
+    }
 
     if (response.error) {
       setError({
@@ -71,6 +90,7 @@ function SaveAuthorForm({ handleClose, classes }: PropTypes){
               label="Author Name"
               fullWidth={true}
               helperText={error.message}
+              value={author.name}
               onChange={handleChange('name')}
             />
           </form>
@@ -78,10 +98,10 @@ function SaveAuthorForm({ handleClose, classes }: PropTypes){
         <Grid className={classes.buttonContainer} xs={6}>
           <Button
             className={classes.button}
-            onClick={HandleAddAuthor}
+            onClick={HandleSaveAuthor}
             variant="contained"
             color="primary">
-            Add
+            {isEditMod ? 'Save': 'Add' }
           </Button>
         </Grid>
         <Grid className={classes.buttonContainer} xs={6}>

@@ -25,12 +25,7 @@ function AuthorTable(){
   }, []);
 
   useEffect(() => {
-    if (selectedAuthor) {
-      setSaveAuthorModal({
-        open: true,
-        title: `Save Author: ${selectedAuthor?.id}`
-      })
-    }
+    fetchData();
   }, [selectedAuthor]);
 
   const fetchData = async () => {
@@ -55,6 +50,10 @@ function AuthorTable(){
   const handleEditAction = (id: string) => {
     console.log(`edit: ${id}`);
     setSelectedAuthor(authors.find((author) => author.id === id));
+    setSaveAuthorModal({
+      open: true,
+      title: `Save Author: ${id}`
+    });
   }
 
   const handleDeleteAction = (id: string) => {
