@@ -4,4 +4,4 @@ export type ReportsResponse = import('./reports/reports-response.type').ReportsR
 
 // Request DTOs
 export type AuthorsRequest = import('./authors/authors-request.type').AuthorsRequest;
-export type ReportsRequest = import('./reports/reports-response.type').ReportsResponse;
+export type ReportsRequest = import('./reports/reports-request.type').ReportsRequest;
