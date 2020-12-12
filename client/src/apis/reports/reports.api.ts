@@ -15,7 +15,7 @@ export const getReports = async (): Promise<ReportsResponse[] | ErrorResponse> =
     return response.errorResponse as ErrorResponse;
   }
 
-  reports = {...response.data};
+  reports = [...response.data];
 
   return reports;
 };
