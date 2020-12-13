@@ -3,6 +3,7 @@ import React from "react";
 import {
   HomeView,
   AuthorView,
+  ReportView,
 } from "./views";
 
 
@@ -10,6 +11,10 @@ export const routes: Routes[] = [
   {
     path: '/author',
     component: AuthorView,
+  },
+  {
+    path: '/report',
+    component: ReportView,
   },
   {
     path: '/*',
