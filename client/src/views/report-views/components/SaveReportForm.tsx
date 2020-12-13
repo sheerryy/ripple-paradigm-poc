@@ -30,7 +30,10 @@ function SaveReportForm({
   const [report, setReport] = useState<ReportsRequest>({
     title: '',
     authorId: '',
-    data: []
+    data: [{
+      paragraph: '',
+      heading: ''
+    }]
   });
   const [isEditMod, setIsEditMod] = useState<boolean>(false);
 
@@ -132,12 +135,14 @@ function SaveReportForm({
             />
         </Grid>
         <Grid item xs={12}>
-          <FormControl>
+          <FormControl className={classes.formControl}>
             <InputLabel id="report-author-id-input">Author</InputLabel>
             <Select
-              labelId="report-author-id-select"
+              labelId="report-author-id-input"
               id="report-author-id-select"
               onChange={handleSelectChange}
+              value={propReport?.Author.id}
+              fullWidth={true}
             >
               {authors.map((author) => <MenuItem value={author.id}>{author.name}</MenuItem>)}
             </Select>
