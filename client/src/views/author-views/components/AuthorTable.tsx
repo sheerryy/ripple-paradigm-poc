@@ -32,10 +32,6 @@ function AuthorTable(){
     fetchData();
   }, []);
 
-  useEffect(() => {
-    fetchData();
-  }, [selectedAuthor]);
-
   const fetchData = async () => {
     const result: any = await getAuthors();
 
