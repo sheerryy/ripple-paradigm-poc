@@ -141,7 +141,7 @@ function SaveReportForm({
               labelId="report-author-id-input"
               id="report-author-id-select"
               onChange={handleSelectChange}
-              value={propReport?.Author.id}
+              defaultValue={propReport?.Author.id}
               fullWidth={true}
             >
               {authors.map((author) => <MenuItem value={author.id}>{author.name}</MenuItem>)}
