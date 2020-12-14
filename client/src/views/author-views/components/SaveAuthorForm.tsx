@@ -81,7 +81,6 @@ function SaveAuthorForm({
   return (
       <Grid container>
         <Grid item xs={12}>
-          <form noValidate autoComplete="off">
             <TextField
               className={classes.textField}
               variant="filled"
@@ -93,7 +92,6 @@ function SaveAuthorForm({
               value={author.name}
               onChange={handleChange('name')}
             />
-          </form>
         </Grid>
         <Grid className={classes.buttonContainer} xs={6}>
           <Button
