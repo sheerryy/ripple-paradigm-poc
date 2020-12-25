@@ -1,6 +1,6 @@
 import { AuthorsRequest } from "../../types/dtos";
 
-type AuthorState = {
+export type AuthorState = {
   authors: AuthorsRequest[]
 };
 
