@@ -1,15 +1,24 @@
-import { AuthorsResponse } from "../../types/dtos";
+import {AuthorsResponse} from '../../types/dtos';
+import {AuthorActionType, CLEAR_AUTHORS, GET_AUTHORS, SET_AUTHORS} from '../types/Author.type';
 
-export type AuthorActionsType = 'GET_AUTHORS' | 'SET_AUTHORS' | 'CLEAR_AUTHORS';
 
-export function typedAction(type: AuthorActionsType, payload?: any) {
-  return { type, payload };
-}
+export const getAuthors = (): AuthorActionType => {
+  return {
+    type: GET_AUTHORS,
+  };
+};
 
-export const getAuthors = () => typedAction('GET_AUTHORS');
+export const setAuthors = (authors: AuthorsResponse[]): AuthorActionType => {
+  return {
+    type: SET_AUTHORS,
+    payload: authors,
+  };
+};
 
-export const setAuthors = (authors: AuthorsResponse) => typedAction('SET_AUTHORS', authors);
+export const clearAuthors = (): AuthorActionType => {
+  return {
+    type: CLEAR_AUTHORS,
+  };
+};
 
-export const clearAuthors = () => typedAction('CLEAR_AUTHORS');
-
-export type AuthorAction = ReturnType<typeof getAuthors | typeof setAuthors | typeof clearAuthors>;
+export type AuthorActions = ReturnType<typeof getAuthors | typeof setAuthors | typeof clearAuthors>;
