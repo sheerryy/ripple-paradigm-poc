@@ -1,6 +1,10 @@
-import {AuthorsResponse} from '../../types/dtos';
-import {AuthorActionType, CLEAR_AUTHORS, GET_AUTHORS, SET_AUTHORS} from '../types/Author.type';
-
+import {
+  GET_AUTHORS,
+  SET_AUTHORS,
+  CLEAR_AUTHORS,
+  AuthorActionType,
+} from '../types/Author.type';
+import { AuthorsResponse } from '../../types/dtos';
 
 export const getAuthors = (): AuthorActionType => {
   return {

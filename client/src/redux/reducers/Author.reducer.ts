@@ -1,4 +1,10 @@
-import {AuthorActionType, AuthorState, CLEAR_AUTHORS, GET_AUTHORS, SET_AUTHORS,} from '../types/Author.type';
+import {
+  AuthorState,
+  GET_AUTHORS,
+  SET_AUTHORS,
+  CLEAR_AUTHORS,
+  AuthorActionType,
+} from '../types/Author.type';
 
 const initialState: AuthorState = {
   authors: []

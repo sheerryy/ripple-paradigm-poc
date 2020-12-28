@@ -9,16 +9,16 @@ export type AuthorState = {
 };
 
 interface GetAuthorsAction {
-  type: typeof GET_AUTHORS
+  type: typeof GET_AUTHORS;
 }
 
 interface SetAuthorsAction {
-  type: typeof SET_AUTHORS
-  payload: AuthorsResponse[]
+  type: typeof SET_AUTHORS;
+  payload: AuthorsResponse[];
 }
 
 interface ClearAuthorsAction {
-  type: typeof CLEAR_AUTHORS
+  type: typeof CLEAR_AUTHORS;
 }
 
 export type AuthorActionType = GetAuthorsAction | SetAuthorsAction | ClearAuthorsAction;

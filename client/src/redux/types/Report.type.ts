@@ -4,7 +4,7 @@ export const GET_REPORTS = 'GET_REPORTS';
 export const SET_REPORTS = 'SET_REPORTS';
 export const CLEAR_REPORTS = 'CLEAR_REPORTS';
 
-export type ReportsState = {
+export type ReportState = {
   reports: ReportsResponse[]
 };
 
