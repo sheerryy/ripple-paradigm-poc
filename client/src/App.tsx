@@ -4,8 +4,10 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import { Provider } from 'react-redux';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 
+import { store } from './redux/store';
 import { routes } from './routes';
 import { NavBar } from './components';
 
@@ -16,20 +18,22 @@ const THEME = createMuiTheme();
 function App() {
   return (
     <MuiThemeProvider theme={THEME}>
-      <div className="App">
-        <NavBar/>
-        <Router>
-          <Switch>
-            {
-              routes.map(
-                ({...props}) => (
-                  <Route {...props}/>
+      <Provider store={store}>
+        <div className="App">
+          <NavBar/>
+          <Router>
+            <Switch>
+              {
+                routes.map(
+                  ({...props}) => (
+                    <Route {...props}/>
+                  )
                 )
-              )
-            }
-          </Switch>
-        </Router>
-      </div>
+              }
+            </Switch>
+          </Router>
+        </div>
+      </Provider>
     </MuiThemeProvider>
   );
 }
