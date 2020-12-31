@@ -6,12 +6,12 @@ import {
   AuthorActionType,
 } from '../types/Author.type';
 
-const initialState: AuthorState = {
+export const initialAuthorState: AuthorState = {
   authors: []
 }
 
 export function authorReducer(
-  state = initialState,
+  state = initialAuthorState,
   action: AuthorActionType
 ): AuthorState {
   switch (action.type) {

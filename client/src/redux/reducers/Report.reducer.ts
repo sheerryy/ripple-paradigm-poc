@@ -1,11 +1,11 @@
 import {CLEAR_REPORTS, GET_REPORTS, ReportActionType, ReportState, SET_REPORTS,} from '../types/Report.type';
 
-const initialState: ReportState = {
+export const initialReportState: ReportState = {
   reports: []
 }
 
 export function reportReducer(
-  state = initialState,
+  state = initialReportState,
   action: ReportActionType
 ): ReportState {
   switch (action.type) {
