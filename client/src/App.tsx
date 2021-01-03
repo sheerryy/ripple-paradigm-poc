@@ -14,11 +14,13 @@ import { NavBar } from './components';
 import './App.css';
 
 const THEME = createMuiTheme();
+const theStore = store();
+theStore.runSaga();
 
 function App() {
   return (
     <MuiThemeProvider theme={THEME}>
-      <Provider store={store}>
+      <Provider store={theStore}>
         <div className="App">
           <NavBar/>
           <Router>
