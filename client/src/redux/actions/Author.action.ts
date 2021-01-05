@@ -2,9 +2,16 @@ import {
   GET_AUTHORS,
   SET_AUTHORS,
   CLEAR_AUTHORS,
+  GET_AUTHORS_ASYNC,
   AuthorActionType,
 } from '../types/Author.type';
 import { AuthorsResponse } from '../../types/dtos';
+
+export const getAuthorsAsync = (): AuthorActionType => {
+  return {
+    type: GET_AUTHORS_ASYNC,
+  };
+};
 
 export const getAuthors = (): AuthorActionType => {
   return {
@@ -25,4 +32,4 @@ export const clearAuthors = (): AuthorActionType => {
   };
 };
 
-export type AuthorActions = ReturnType<typeof getAuthors | typeof setAuthors | typeof clearAuthors>;
+export type AuthorActions = ReturnType<typeof getAuthors | typeof setAuthors | typeof clearAuthors | typeof getAuthorsAsync>;
