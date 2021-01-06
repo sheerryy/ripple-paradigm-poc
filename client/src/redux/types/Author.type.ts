@@ -1,4 +1,5 @@
-import { AuthorsResponse } from '../../types/dtos';
+import { ErrorResponse } from '../../types/responses';
+import { AuthorsRequest, AuthorsResponse } from '../../types/dtos';
 
 export const GET_AUTHORS = 'GET_AUTHORS';
 export const SET_AUTHORS = 'SET_AUTHORS';
@@ -20,7 +21,7 @@ interface GetAuthorsAction {
 
 interface SetAuthorsAction {
   type: typeof SET_AUTHORS;
-  payload: AuthorsResponse[];
+  payload: AuthorsResponse[] | ErrorResponse;
 }
 
 interface ClearAuthorsAction {
@@ -29,10 +30,12 @@ interface ClearAuthorsAction {
 
 interface CreateAuthorSuccessAction {
   type: typeof CREATE_AUTHOR_SUCCESS;
+  payload: AuthorsResponse;
 }
 
 interface CreateAuthorFailAction {
   type: typeof CREATE_AUTHOR_FAIL;
+  payload: ErrorResponse;
 }
 
 interface GetAuthorsAsyncAction {
@@ -41,6 +44,7 @@ interface GetAuthorsAsyncAction {
 
 interface CreateAuthorAsyncAction {
   type: typeof CREATE_AUTHOR_ASYNC;
+  payload: AuthorsRequest;
 }
 
 export type AuthorActionType = GetAuthorsAction
