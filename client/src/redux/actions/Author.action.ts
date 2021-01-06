@@ -8,7 +8,8 @@ import {
   CREATE_AUTHOR_ASYNC,
   AuthorActionType,
 } from '../types/Author.type';
-import { AuthorsResponse } from '../../types/dtos';
+import { ErrorResponse } from '../../types/responses';
+import { AuthorsRequest, AuthorsResponse } from '../../types/dtos';
 
 export const getAuthors = (): AuthorActionType => {
   return {
@@ -29,15 +30,17 @@ export const clearAuthors = (): AuthorActionType => {
   };
 };
 
-export const createAuthorSuccess = (): AuthorActionType => {
+export const createAuthorSuccess = (author: AuthorsResponse): AuthorActionType => {
   return {
     type: CREATE_AUTHOR_SUCCESS,
+    payload: author,
   };
 };
 
-export const createAuthorFail = (): AuthorActionType => {
+export const createAuthorFail = (errorResponse: ErrorResponse): AuthorActionType => {
   return {
     type: CREATE_AUTHOR_FAIL,
+    payload: errorResponse,
   };
 };
 
@@ -47,9 +50,10 @@ export const getAuthorsAsync = (): AuthorActionType => {
   };
 };
 
-export const createAuthorAsync = (): AuthorActionType => {
+export const createAuthorAsync = (authorDto: AuthorsRequest): AuthorActionType => {
   return {
     type: CREATE_AUTHOR_ASYNC,
+    payload: authorDto,
   };
 };
 
