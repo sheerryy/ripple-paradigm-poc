@@ -5,9 +5,11 @@ import {
   CLEAR_AUTHORS,
   AuthorActionType,
 } from '../types/Author.type';
+import { AuthorsResponse } from '../../types/dtos';
 
 export const initialAuthorState: AuthorState = {
-  authors: []
+  authors: [],
+  newAuthor: null
 }
 
 export function authorReducer(
@@ -18,7 +20,7 @@ export function authorReducer(
     case GET_AUTHORS:
       return { ...state, authors: state.authors };
     case SET_AUTHORS:
-      return { ...state, authors: action.payload };
+      return { ...state, authors: action.payload as AuthorsResponse[] };
     case CLEAR_AUTHORS:
       return { ...state, authors: [] };
     default:
