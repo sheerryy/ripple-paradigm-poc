@@ -47,5 +47,10 @@
     "@routes": "dist/routes",
     "@modules": "dist/modules",
     "@middlewares": "dist/middlewares"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
   }
 }
