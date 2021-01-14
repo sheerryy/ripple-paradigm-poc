@@ -1,4 +1,5 @@
 import { ReportsResponse } from '../../types/dtos';
+import { ErrorResponse } from '../../types/responses';
 
 export const GET_REPORTS_ASYNC = 'GET_REPORTS_ASYNC';
 export const GET_REPORTS_SUCCESS = 'GET_REPORTS_SUCCESS';
@@ -16,10 +17,12 @@ interface GetReportsAsyncAction {
 
 interface GetReportsSuccessAction {
   type: typeof GET_REPORTS_SUCCESS;
+  payload: ReportsResponse[];
 }
 
 interface GetReportsFailAction {
   type: typeof GET_REPORTS_FAIL;
+  payload: ErrorResponse;
 }
 
 interface SetReportsAction {
