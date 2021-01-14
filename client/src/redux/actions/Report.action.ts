@@ -1,16 +1,13 @@
 import {
-  GET_REPORTS,
+  GET_REPORTS_ASYNC,
+  GET_REPORTS_FAIL,
+  GET_REPORTS_SUCCESS,
   SET_REPORTS,
   CLEAR_REPORTS,
   ReportActionType,
 } from '../types/Report.type';
 import { ReportsResponse } from '../../types/dtos';
-
-export const getReports = (): ReportActionType => {
-  return {
-    type: GET_REPORTS,
-  };
-};
+import { ErrorResponse } from '../../types/responses';
 
 export const setReports = (reports: ReportsResponse[]): ReportActionType => {
   return {
@@ -25,4 +22,30 @@ export const clearReports = (): ReportActionType => {
   };
 };
 
-export type ReportActions = ReturnType<typeof getReports | typeof setReports | typeof clearReports>;
+export const getReportsAsync = (): ReportActionType => {
+  return {
+    type: GET_REPORTS_ASYNC,
+  };
+};
+
+export const getReportsFail = (error: ErrorResponse): ReportActionType => {
+  return {
+    type: GET_REPORTS_FAIL,
+    payload: error,
+  };
+};
+
+export const getReportsSuccess = (reports: ReportsResponse[]): ReportActionType => {
+  return {
+    type: GET_REPORTS_SUCCESS,
+    payload: reports,
+  };
+};
+
+export type ReportActions = ReturnType<
+  typeof getReportsAsync |
+  typeof getReportsFail |
+  typeof getReportsSuccess |
+  typeof setReports |
+  typeof clearReports
+  >;
