@@ -1,21 +1,13 @@
 import {
-  GET_AUTHORS,
-  SET_AUTHORS,
-  CLEAR_AUTHORS,
-  CREATE_AUTHOR_FAIL,
-  CREATE_AUTHOR_SUCCESS,
-  GET_AUTHORS_ASYNC,
-  CREATE_AUTHOR_ASYNC,
   AuthorActionType,
+  CLEAR_AUTHORS,
+  GET_AUTHORS_ASYNC,
+  GET_AUTHORS_FAIL,
+  GET_AUTHORS_SUCCESS,
+  SET_AUTHORS,
 } from '../types/Author.type';
+import { AuthorsResponse } from '../../types/dtos';
 import { ErrorResponse } from '../../types/responses';
-import { AuthorsRequest, AuthorsResponse } from '../../types/dtos';
-
-export const getAuthors = (): AuthorActionType => {
-  return {
-    type: GET_AUTHORS,
-  };
-};
 
 export const setAuthors = (authors: AuthorsResponse[]): AuthorActionType => {
   return {
@@ -30,39 +22,30 @@ export const clearAuthors = (): AuthorActionType => {
   };
 };
 
-export const createAuthorSuccess = (author: AuthorsResponse): AuthorActionType => {
-  return {
-    type: CREATE_AUTHOR_SUCCESS,
-    payload: author,
-  };
-};
-
-export const createAuthorFail = (errorResponse: ErrorResponse): AuthorActionType => {
-  return {
-    type: CREATE_AUTHOR_FAIL,
-    payload: errorResponse,
-  };
-};
-
 export const getAuthorsAsync = (): AuthorActionType => {
   return {
     type: GET_AUTHORS_ASYNC,
   };
 };
 
-export const createAuthorAsync = (authorDto: AuthorsRequest): AuthorActionType => {
+export const getAuthorsSuccess = (authors: AuthorsResponse[]): AuthorActionType => {
   return {
-    type: CREATE_AUTHOR_ASYNC,
-    payload: authorDto,
+    type: GET_AUTHORS_SUCCESS,
+    payload: authors,
+  };
+};
+
+export const getAuthorsFail = (error: ErrorResponse): AuthorActionType => {
+  return {
+    type: GET_AUTHORS_FAIL,
+    payload: error,
   };
 };
 
 export type AuthorActions = ReturnType<
-  typeof getAuthors
   | typeof setAuthors
   | typeof clearAuthors
-  | typeof createAuthorFail
-  | typeof createAuthorSuccess
   | typeof getAuthorsAsync
-  | typeof createAuthorAsync
+  | typeof getAuthorsSuccess
+  | typeof getAuthorsFail
 >;

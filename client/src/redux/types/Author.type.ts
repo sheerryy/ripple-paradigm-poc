@@ -1,13 +1,11 @@
 import { ErrorResponse } from '../../types/responses';
 import { AuthorsRequest, AuthorsResponse } from '../../types/dtos';
 
-export const GET_AUTHORS = 'GET_AUTHORS';
 export const SET_AUTHORS = 'SET_AUTHORS';
 export const CLEAR_AUTHORS = 'CLEAR_AUTHORS';
-export const CREATE_AUTHOR_SUCCESS = 'CREATE_AUTHOR_SUCCESS';
-export const CREATE_AUTHOR_FAIL = 'CREATE_AUTHOR_FAIL';
 export const GET_AUTHORS_ASYNC = 'GET_AUTHORS_ASYNC';
-export const CREATE_AUTHOR_ASYNC = 'CREATE_AUTHOR_ASYNC';
+export const GET_AUTHORS_SUCCESS = 'GET_AUTHORS_SUCCESS';
+export const GET_AUTHORS_FAIL = 'GET_AUTHORS_FAIL';
 
 
 export type AuthorState = {
@@ -15,42 +13,34 @@ export type AuthorState = {
   newAuthor: AuthorsResponse | null,
 };
 
-interface GetAuthorsAction {
-  type: typeof GET_AUTHORS;
-}
-
 interface SetAuthorsAction {
   type: typeof SET_AUTHORS;
-  payload: AuthorsResponse[] | ErrorResponse;
+  payload: AuthorsResponse[];
 }
 
 interface ClearAuthorsAction {
   type: typeof CLEAR_AUTHORS;
 }
 
-interface CreateAuthorSuccessAction {
-  type: typeof CREATE_AUTHOR_SUCCESS;
-  payload: AuthorsResponse;
-}
-
-interface CreateAuthorFailAction {
-  type: typeof CREATE_AUTHOR_FAIL;
-  payload: ErrorResponse;
-}
-
 interface GetAuthorsAsyncAction {
   type: typeof GET_AUTHORS_ASYNC;
 }
 
-interface CreateAuthorAsyncAction {
-  type: typeof CREATE_AUTHOR_ASYNC;
-  payload: AuthorsRequest;
+
+interface GetAuthorsSuccessAction {
+  type: typeof GET_AUTHORS_SUCCESS;
+  payload: AuthorsResponse[];
 }
 
-export type AuthorActionType = GetAuthorsAction
-  | SetAuthorsAction
+
+interface GetAuthorsFailAction {
+  type: typeof GET_AUTHORS_FAIL;
+  payload: ErrorResponse;
+}
+
+
+export type AuthorActionType =  SetAuthorsAction
   | ClearAuthorsAction
-  | CreateAuthorSuccessAction
-  | CreateAuthorFailAction
   | GetAuthorsAsyncAction
-  | CreateAuthorAsyncAction;
+  | GetAuthorsSuccessAction
+  | GetAuthorsFailAction;
