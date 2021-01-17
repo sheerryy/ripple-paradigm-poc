@@ -8,7 +8,8 @@ export const SET_REPORTS = 'SET_REPORTS';
 export const CLEAR_REPORTS = 'CLEAR_REPORTS';
 
 export type ReportState = {
-  reports: ReportsResponse[]
+  reports: ReportsResponse[],
+  error: ErrorResponse | null,
 };
 
 interface GetReportsAsyncAction {

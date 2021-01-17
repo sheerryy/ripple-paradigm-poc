@@ -1,5 +1,5 @@
 import { ErrorResponse } from '../../types/responses';
-import { AuthorsRequest, AuthorsResponse } from '../../types/dtos';
+import { AuthorsResponse } from '../../types/dtos';
 
 export const SET_AUTHORS = 'SET_AUTHORS';
 export const CLEAR_AUTHORS = 'CLEAR_AUTHORS';
@@ -10,7 +10,7 @@ export const GET_AUTHORS_FAIL = 'GET_AUTHORS_FAIL';
 
 export type AuthorState = {
   authors: AuthorsResponse[],
-  newAuthor: AuthorsResponse | null,
+  error: ErrorResponse | null,
 };
 
 interface SetAuthorsAction {
