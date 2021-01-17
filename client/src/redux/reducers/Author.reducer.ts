@@ -1,15 +1,15 @@
 import {
-  AuthorState,
-  GET_AUTHORS,
-  SET_AUTHORS,
-  CLEAR_AUTHORS,
   AuthorActionType,
+  AuthorState,
+  CLEAR_AUTHORS,
+  GET_AUTHORS_FAIL,
+  GET_AUTHORS_SUCCESS,
+  SET_AUTHORS,
 } from '../types/Author.type';
-import { AuthorsResponse } from '../../types/dtos';
 
 export const initialAuthorState: AuthorState = {
   authors: [],
-  newAuthor: null
+  error: null
 }
 
 export function authorReducer(
@@ -17,10 +17,12 @@ export function authorReducer(
   action: AuthorActionType
 ): AuthorState {
   switch (action.type) {
-    case GET_AUTHORS:
-      return { ...state, authors: state.authors };
+    case GET_AUTHORS_SUCCESS:
+      return { ...state, authors: state.authors, error: null };
+    case GET_AUTHORS_FAIL:
+      return { ...state, authors: [], error: action.payload };
     case SET_AUTHORS:
-      return { ...state, authors: action.payload as AuthorsResponse[] };
+      return { ...state, authors: action.payload };
     case CLEAR_AUTHORS:
       return { ...state, authors: [] };
     default:
