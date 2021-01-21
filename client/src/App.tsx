@@ -12,10 +12,11 @@ import { routes } from './routes';
 import { NavBar } from './components';
 
 import './App.css';
+import rootSaga from "./redux/sagas";
 
 const THEME = createMuiTheme();
 const theStore = store();
-theStore.runSaga();
+theStore.runSaga(rootSaga);
 
 function App() {
   return (
