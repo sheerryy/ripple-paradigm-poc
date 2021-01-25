@@ -18,7 +18,7 @@ export function authorReducer(
 ): AuthorState {
   switch (action.type) {
     case GET_AUTHORS_SUCCESS:
-      return { ...state, authors: state.authors, error: null };
+      return { ...state, authors: action.payload, error: null };
     case GET_AUTHORS_FAIL:
       return { ...state, authors: [], error: action.payload };
     case SET_AUTHORS:
