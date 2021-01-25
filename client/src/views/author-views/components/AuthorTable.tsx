@@ -1,3 +1,4 @@
+import {useDispatch, useSelector} from "react-redux";
 import React, { useState, useEffect } from 'react';
 import {
   Button,
@@ -13,9 +14,13 @@ import { BasicTable } from "../../../components";
 import { camelCaseToNormal } from "../../../utils";
 import { AuthorsResponse } from "../../../types/dtos";
 import SaveAuthorForm from "./SaveAuthorForm";
+import {AppState} from "../../../redux/types/App.type";
+import {getAuthorsAsync} from "../../../redux/actions/Author.action";
 
 function AuthorTable(){
-  const [authors, setAuthors] = useState<AuthorsResponse[]>([]);
+  const authorState = useSelector((state: AppState) => state.author);
+  const dispatch = useDispatch()
+
   const [selectedAuthor, setSelectedAuthor] = useState<AuthorsResponse | undefined>(undefined);
   const [saveAuthorModal, setSaveAuthorModal] = useState<{ open: boolean, title: string }>({
     open: false,
@@ -29,7 +34,9 @@ function AuthorTable(){
   });
 
   useEffect(() => {
-    fetchData();
+    if (authorState.authors.length === 0) {
+      dispatch(getAuthorsAsync());
+    }
   }, []);
 
   const fetchData = async () => {
@@ -39,7 +46,7 @@ function AuthorTable(){
     if (result.errorCode) {
       console.log(result.message)
     } else {
-      setAuthors(result);
+      dispatch(getAuthorsAsync());
     }
   };
 
@@ -54,7 +61,7 @@ function AuthorTable(){
 
   const handleEditAction = (id: string) => {
     console.log(`edit: ${id}`);
-    setSelectedAuthor(authors.find((author) => author.id === id));
+    setSelectedAuthor(authorState.authors.find((author) => author.id === id));
     setSaveAuthorModal({
       open: true,
       title: `Save Author: ${id}`
@@ -63,7 +70,7 @@ function AuthorTable(){
 
   const handleDeleteAction = (id: string) => {
     console.log(`delete: ${id}`);
-    setSelectedAuthor(authors.find((author) => author.id === id));
+    setSelectedAuthor(authorState.authors.find((author) => author.id === id));
     setDeleteAuthorModal(true);
   }
 
@@ -99,7 +106,7 @@ function AuthorTable(){
     fetchData();
   }
 
-  return authors?.length ?
+  return authorState.authors?.length ?
     <div>
       <BasicTable
         title="Authors"
@@ -112,9 +119,9 @@ function AuthorTable(){
           deleteAction: true,
           handleDelete: handleDeleteAction,
         }}
-        tableHeadings={Object.keys(authors[0]).map((heading) => camelCaseToNormal(heading))}
-        tableData={authors.map((author) => Object.values(author))}
-        tableDataIds={authors.map((author) => author.id)}
+        tableHeadings={Object.keys(authorState.authors[0]).map((heading) => camelCaseToNormal(heading))}
+        tableData={authorState.authors.map((author) => Object.values(author))}
+        tableDataIds={authorState.authors.map((author) => author.id)}
       />
       <Dialog
         open={saveAuthorModal.open}
