@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import {Alert, Color, Skeleton} from "@material-ui/lab";
 
-import { deleteAuthor, getAuthors } from "../../../apis/authors/authors.api";
+import { deleteAuthor } from "../../../apis/authors/authors.api";
 import { BasicTable } from "../../../components";
 import { camelCaseToNormal } from "../../../utils";
 import { AuthorsResponse } from "../../../types/dtos";
@@ -39,15 +39,8 @@ function AuthorTable(){
     }
   }, []);
 
-  const fetchData = async () => {
-    const result: any = await getAuthors();
-
-    console.log(`result`, result)
-    if (result.errorCode) {
-      console.log(result.message)
-    } else {
-      dispatch(getAuthorsAsync());
-    }
+  const fetchData = () => {
+    dispatch(getAuthorsAsync());
   };
 
 
