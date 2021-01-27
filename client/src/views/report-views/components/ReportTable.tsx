@@ -1,3 +1,4 @@
+import {useDispatch, useSelector} from "react-redux";
 import React, { useState, useEffect } from 'react';
 import {
   Button,
@@ -9,15 +10,19 @@ import {
 } from "@material-ui/core";
 import { Alert, Color, Skeleton } from "@material-ui/lab";
 
-import { deleteReport, getReports } from "../../../apis/reports/reports.api";
 import { BasicTable } from "../../../components";
-import { ReportsResponse, AuthorsResponse } from "../../../types/dtos";
+import { deleteReport } from "../../../apis/reports/reports.api";
+import { ReportsResponse } from "../../../types/dtos";
 import SaveReportForm from "./SaveReportForm";
-import { getAuthors } from "../../../apis/authors/authors.api";
+import {AppState} from "../../../redux/types/App.type";
+import {getAuthorsAsync} from "../../../redux/actions/Author.action";
+import {getReportsAsync} from "../../../redux/actions/Report.action";
 
 function ReportTable(){
-  const [reports, setReports] = useState<ReportsResponse[]>([]);
-  const [authors, setAuthors] = useState<AuthorsResponse[]>([]);
+  const reportState = useSelector((state: AppState) => state.report);
+  const authorState = useSelector((state: AppState) => state.author);
+  const dispatch = useDispatch()
+
   const [selectedReport, setSelectedReport] = useState<ReportsResponse | undefined>(undefined);
   const [saveReportModal, setSaveReportModal] = useState<{ open: boolean, title: string }>({
     open: false,
@@ -31,30 +36,20 @@ function ReportTable(){
   });
 
   useEffect(() => {
-    fetchReportData();
-    fetchAuthorData();
+    if (authorState.authors.length === 0) {
+      dispatch(getAuthorsAsync());
+    }
+    if (reportState.reports.length === 0) {
+      dispatch(getReportsAsync());
+    }
   }, []);
 
   const fetchAuthorData = async () => {
-    const result: any = await getAuthors();
-
-    console.log(`result`, result)
-    if (result.errorCode) {
-      console.log(result.message)
-    } else {
-      setAuthors(result);
-    }
+    dispatch(getAuthorsAsync());
   };
 
   const fetchReportData = async () => {
-    const result: any = await getReports();
-
-    console.log(`result`, result)
-    if (result.errorCode) {
-      console.log(result.message)
-    } else {
-      setReports(result);
-    }
+    dispatch(getReportsAsync());
   };
 
   const handleCreateAction = () => {
@@ -67,7 +62,7 @@ function ReportTable(){
 
   const handleEditAction = (id: string) => {
     console.log(`edit: ${id}`);
-    setSelectedReport(reports.find((report) => report.id === id));
+    setSelectedReport(reportState.reports.find((report) => report.id === id));
     setSaveReportModal({
       open: true,
       title: `Save Report: ${id}`
@@ -76,7 +71,7 @@ function ReportTable(){
 
   const handleDeleteAction = (id: string) => {
     console.log(`delete: ${id}`);
-    setSelectedReport(reports.find((report) => report.id === id));
+    setSelectedReport(reportState.reports.find((report) => report.id === id));
     setDeleteReportModal(true);
   }
 
@@ -112,7 +107,7 @@ function ReportTable(){
     fetchReportData();
   }
 
-  return reports?.length ?
+  return reportState.reports?.length ?
     <div>
       <BasicTable
         title="Reports"
@@ -126,8 +121,8 @@ function ReportTable(){
           handleDelete: handleDeleteAction,
         }}
         tableHeadings={['Id', 'Title', 'Author']}
-        tableData={reports.map((report) => [report.id, report.title, report.Author.name])}
-        tableDataIds={reports.map((report) => report.id)}
+        tableData={reportState.reports.map((report) => [report.id, report.title, report.Author.name])}
+        tableDataIds={reportState.reports.map((report) => report.id)}
       />
       <Dialog
         open={saveReportModal.open}
@@ -137,7 +132,7 @@ function ReportTable(){
       >
         <DialogTitle id="alert-dialog-title">{saveReportModal.title}</DialogTitle>
         <DialogContent>
-          <SaveReportForm authors={authors} report={selectedReport} handleClose={handleReportDialogClose}/>
+          <SaveReportForm authors={authorState.authors} report={selectedReport} handleClose={handleReportDialogClose}/>
         </DialogContent>
       </Dialog>
       <Dialog

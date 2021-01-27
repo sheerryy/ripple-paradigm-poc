@@ -5,7 +5,7 @@ import {
 } from '../../types/dtos';
 import {
   getReportsSuccess as getReportsSuccessAction,
-  getReportsFail as getReportsFailAction,
+  getReportsFail as getReportsFailAction, clearReports,
 } from '../actions/Report.action';
 import {
   getReports as getReportsApi,
@@ -14,6 +14,7 @@ import { ErrorResponse } from '../../types/responses';
 
 export function* getAllReportWorker() {
   try {
+    yield put(clearReports())
     const result = yield call(getReportsApi);
 
     if (result.errorCode) {
