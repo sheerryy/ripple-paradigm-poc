@@ -1,10 +1,10 @@
-import SocketIO from 'socket.io';
-import { Server } from 'http';
+import { Server as SocketServer } from 'socket.io';
+import { Server as HttpServer } from 'http';
 import {
   Request,
   Response,
   NextFunction,
-} from "express";
+} from 'express';
 
 import {
   EmitterResponse,
@@ -13,10 +13,14 @@ import {
 } from '@utils/types';
 
 class SocketIoMiddleware {
-  socketServer: SocketIO.Server;
+  socketServer: SocketServer;
 
-  constructor(httpServer: Server) {
-    this.socketServer = SocketIO(httpServer);
+  constructor(httpServer: HttpServer) {
+    this.socketServer = new SocketServer(httpServer, {
+      cors: {
+        origin: '*',
+      },
+    });
   }
 
   socketEmitter = (context: string, response: EmitterResponse) => {
@@ -33,7 +37,7 @@ class SocketIoMiddleware {
   }
 
   emitterMiddleware = (context: string) => (req: Request, res: Response, next: NextFunction) => {
-    res.on("finish", () => {
+    res.on('finish', () => {
       if (['POST', 'PUT', 'PATCH', 'DELETE'].indexOf(req.method) !== -1) {
         console.log(`${req.method} request on ${context}`);
 
@@ -43,14 +47,18 @@ class SocketIoMiddleware {
           return;
         }
 
-        this.socketEmitter(context, this.getEmitterResponse(req.method as EmitterRequestMethod, req.params?.id));
+        this.socketEmitter(
+          context,
+          this.getEmitterResponse(req.method as EmitterRequestMethod, req.params?.id),
+        );
 
         const dependentContexts: DependentContext[] = res.locals.dependentContexts || [];
 
+        // eslint-disable-next-line no-restricted-syntax
         for (const dependentContext of dependentContexts) {
           this.socketEmitter(
             dependentContext.context,
-            this.getEmitterResponse(dependentContext.requestMethod, dependentContext.id)
+            this.getEmitterResponse(dependentContext.requestMethod, dependentContext.id),
           );
         }
       }
