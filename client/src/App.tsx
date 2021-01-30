@@ -28,8 +28,8 @@ function App() {
             <Switch>
               {
                 routes.map(
-                  ({...props}) => (
-                    <Route {...props}/>
+                  ({...props}, key) => (
+                    <Route key={key} {...props}/>
                   )
                 )
               }

@@ -74,13 +74,13 @@ function BasicTable({
   return (
     <div className={classes.tableRoot}>
       <Grid container>
-        <Grid xs={actions.allowCreate ? 9 : 12}>
+        <Grid item xs={actions.allowCreate ? 9 : 12}>
           <Typography className={classes.tableTitle} variant="h5" align="left">
             {title}
           </Typography>
         </Grid>
         {actions.allowCreate ?
-          <Grid xs={3}>
+          <Grid item xs={3}>
             <IconButton
               aria-label="create"
               onClick={() => handleOnclick('create')()}
@@ -103,7 +103,7 @@ function BasicTable({
         <TableBody>
           {tableData.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
-              {row.map((cell, cellIndex) => <TableCell key={cellIndex}>{cell}</TableCell>)}
+              {row.map((cell, cellIndex) => <TableCell key={`${row[0]}-${cellIndex}`}>{cell}</TableCell>)}
               {actions.action &&
                 <TableCell key={`action-${rowIndex}`}>
                   { actions.editAction &&
