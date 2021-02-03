@@ -10,6 +10,7 @@
     "build:dev": "tsc --watch",
     "prestart": "yarn build",
     "start": "node .",
+    "start:server": "yarn start",
     "start:dev": "nodemon --inspect .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -37,6 +38,7 @@
     "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^7.2.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4"
   },
