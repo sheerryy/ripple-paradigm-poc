@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { AuthorsController } from "@modules/authors";
+import { AuthorsController } from '@modules/authors';
 
 const router = Router();
 const controller = new AuthorsController();

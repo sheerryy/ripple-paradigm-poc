@@ -1,4 +1,4 @@
-import SocketIoMiddleware from "./sockets/socketIo.middleware";
+import SocketIoMiddleware from './sockets/socketIo.middleware';
 
 export {
   SocketIoMiddleware,

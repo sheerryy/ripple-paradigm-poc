@@ -1,4 +1,4 @@
-import { Authors } from "../entities/authors";
+import { Authors } from '../entities/authors';
 
 export const authorsData: Authors[] = [
   {

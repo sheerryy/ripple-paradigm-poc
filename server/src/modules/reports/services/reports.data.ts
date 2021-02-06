@@ -1,4 +1,4 @@
-import { Reports } from "../entities/reports";
+import { Reports } from '../entities/reports';
 
 export const reportsData: Reports[] = [
   {
@@ -8,10 +8,10 @@ export const reportsData: Reports[] = [
     data: [
       {
         heading: 'heading',
-        paragraph: 'Praesent diam purus, placerat eu lacinia quis, egestas a neque. Nunc quis elementum justo.' +
-          ' Phasellus mollis, erat et varius feugiat, nunc elit euismod nunc, ut viverra ante neque et risus.' +
-          ' Vivamus sed semper ex. Mauris in pharetra ligula, a faucibus orci.'
-      }
+        paragraph: 'Praesent diam purus, placerat eu lacinia quis, egestas a neque. Nunc quis elementum justo.'
+          + ' Phasellus mollis, erat et varius feugiat, nunc elit euismod nunc, ut viverra ante neque et risus.'
+          + ' Vivamus sed semper ex. Mauris in pharetra ligula, a faucibus orci.',
+      },
     ],
     createdAt: new Date(),
   },
@@ -22,10 +22,10 @@ export const reportsData: Reports[] = [
     data: [
       {
         heading: 'heading 2',
-        paragraph: 'Praesent diam purus, placerat eu lacinia quis, egestas a neque. Nunc quis elementum justo.' +
-          ' Phasellus mollis, erat et varius feugiat, nunc elit euismod nunc, ut viverra ante neque et risus.' +
-          ' Vivamus sed semper ex. Mauris in pharetra ligula, a faucibus orci.'
-      }
+        paragraph: 'Praesent diam purus, placerat eu lacinia quis, egestas a neque. Nunc quis elementum justo.'
+          + ' Phasellus mollis, erat et varius feugiat, nunc elit euismod nunc, ut viverra ante neque et risus.'
+          + ' Vivamus sed semper ex. Mauris in pharetra ligula, a faucibus orci.',
+      },
     ],
     createdAt: new Date(),
   },
@@ -36,10 +36,10 @@ export const reportsData: Reports[] = [
     data: [
       {
         heading: 'heading',
-        paragraph: 'Praesent diam purus, placerat eu lacinia quis, egestas a neque. Nunc quis elementum justo.' +
-          ' Phasellus mollis, erat et varius feugiat, nunc elit euismod nunc, ut viverra ante neque et risus.' +
-          ' Vivamus sed semper ex. Mauris in pharetra ligula, a faucibus orci.'
-      }
+        paragraph: 'Praesent diam purus, placerat eu lacinia quis, egestas a neque. Nunc quis elementum justo.'
+          + ' Phasellus mollis, erat et varius feugiat, nunc elit euismod nunc, ut viverra ante neque et risus.'
+          + ' Vivamus sed semper ex. Mauris in pharetra ligula, a faucibus orci.',
+      },
     ],
     createdAt: new Date(),
   },
@@ -50,10 +50,10 @@ export const reportsData: Reports[] = [
     data: [
       {
         heading: 'heading 2',
-        paragraph: 'Praesent diam purus, placerat eu lacinia quis, egestas a neque. Nunc quis elementum justo.' +
-          ' Phasellus mollis, erat et varius feugiat, nunc elit euismod nunc, ut viverra ante neque et risus.' +
-          ' Vivamus sed semper ex. Mauris in pharetra ligula, a faucibus orci.'
-      }
+        paragraph: 'Praesent diam purus, placerat eu lacinia quis, egestas a neque. Nunc quis elementum justo.'
+          + ' Phasellus mollis, erat et varius feugiat, nunc elit euismod nunc, ut viverra ante neque et risus.'
+          + ' Vivamus sed semper ex. Mauris in pharetra ligula, a faucibus orci.',
+      },
     ],
     createdAt: new Date(),
   },
@@ -64,10 +64,10 @@ export const reportsData: Reports[] = [
     data: [
       {
         heading: 'heading 1',
-        paragraph: 'Praesent diam purus, placerat eu lacinia quis, egestas a neque. Nunc quis elementum justo.' +
-          ' Phasellus mollis, erat et varius feugiat, nunc elit euismod nunc, ut viverra ante neque et risus.' +
-          ' Vivamus sed semper ex. Mauris in pharetra ligula, a faucibus orci.'
-      }
+        paragraph: 'Praesent diam purus, placerat eu lacinia quis, egestas a neque. Nunc quis elementum justo.'
+          + ' Phasellus mollis, erat et varius feugiat, nunc elit euismod nunc, ut viverra ante neque et risus.'
+          + ' Vivamus sed semper ex. Mauris in pharetra ligula, a faucibus orci.',
+      },
     ],
     createdAt: new Date(),
   },
