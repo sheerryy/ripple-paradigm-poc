@@ -13,7 +13,10 @@ export class AuthorsController {
       this.authorsService = AuthorsService.getInstance();
     }
 
-    getAuthor = (req: Request, res: Response) => {
+    getAuthor = (
+      req: Request,
+      res: Response<{ data: AuthorsResponse } | { code: string, message: string}>,
+    ) => {
       const { id } = req.params;
 
       if (!id) {
@@ -34,22 +37,28 @@ export class AuthorsController {
 
       const data: AuthorsResponse = authorsToAuthorResponse(response);
 
-      res.status(200).json({
+      return res.status(200).json({
         data,
       });
     }
 
-    getAuthors = (req: Request, res: Response) => {
+    getAuthors = (
+      req: Request,
+      res: Response<{ data: AuthorsResponse[] }>,
+    ) => {
       const response = this.authorsService.getAuthors();
 
       const data: AuthorsResponse[] = response.map((author) => authorsToAuthorResponse(author));
 
-      res.status(200).json({
+      return res.status(200).json({
         data,
       });
     }
 
-    createAuthor = (req: Request, res: Response) => {
+    createAuthor = (
+      req: Request,
+      res: Response<{ data: AuthorsResponse} | { code: string, message: string}>,
+    ) => {
       const { name } = req.body;
 
       const author: Partial<Authors> = { name };
@@ -67,12 +76,15 @@ export class AuthorsController {
 
       const data: AuthorsResponse = authorsToAuthorResponse(response);
 
-      res.status(201).json({
+      return res.status(201).json({
         data,
       });
     }
 
-    updateAuthor = (req: Request, res: Response) => {
+    updateAuthor = (
+      req: Request,
+      res: Response<{ data: AuthorsResponse} | { code: string, message: string}>,
+    ) => {
       const { id } = req.params;
       const { name } = req.body;
 
@@ -101,13 +113,16 @@ export class AuthorsController {
 
       res.locals = { dependentContexts };
 
-      res.status(200).json({
+      return res.status(200).json({
         message: 'Author updated successfully.',
         data,
       });
     }
 
-    deleteAuthor = (req: Request, res: Response) => {
+    deleteAuthor = (
+      req: Request,
+      res: Response<{ code?: string, message: string}>,
+    ) => {
       const { id } = req.params;
 
       const response: any = this.authorsService.deleteAuthor(id);
@@ -131,7 +146,7 @@ export class AuthorsController {
 
       res.locals = { dependentContext };
 
-      res.status(204).json({
+      return res.status(204).json({
         message: 'Author deleted successfully.',
       });
     }
