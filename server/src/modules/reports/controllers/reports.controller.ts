@@ -17,7 +17,10 @@ export class ReportsController {
       this.authorService = AuthorsService.getInstance();
     }
 
-    getReport = (req: Request, res: Response) => {
+    getReport = (
+      req: Request,
+      res: Response<{ data: ReportsResponse } | { code: string, message: string}>,
+    ) => {
       const { id } = req.params;
 
       if (!id) {
@@ -36,14 +39,20 @@ export class ReportsController {
         });
       }
 
-      const data: ReportsResponse = reportsToReportResponse(response, this.authorService.getAuthor(response.authorId));
+      const data: ReportsResponse = reportsToReportResponse(
+        response,
+        this.authorService.getAuthor(response.authorId),
+      );
 
-      res.status(200).json({
+      return res.status(200).json({
         data,
       });
     }
 
-    getReports = (req: Request, res: Response) => {
+    getReports = (
+      req: Request,
+      res: Response<{ data: ReportsResponse[] }>,
+    ) => {
       const response = this.reportService.getReports();
 
       const authors = this.authorService.getAuthorByIds(response.map((report) => report.authorId));
@@ -54,12 +63,15 @@ export class ReportsController {
         )),
       );
 
-      res.status(200).json({
+      return res.status(200).json({
         data,
       });
     }
 
-    createReport = (req: Request, res: Response) => {
+    createReport = (
+      req: Request,
+      res: Response<{ data: ReportsResponse } | { code: string, message: string}>,
+    ) => {
       const {
         data,
         title,
@@ -76,7 +88,7 @@ export class ReportsController {
 
       if (!author) {
         return res.status(404).json({
-          errorCode: 'c-001-c-001',
+          code: 'c-001-c-001',
           message: 'Author not found.',
         });
       }
@@ -94,12 +106,15 @@ export class ReportsController {
 
       const reportsResponse: ReportsResponse = reportsToReportResponse(response, author);
 
-      res.status(201).json({
+      return res.status(201).json({
         data: reportsResponse,
       });
     }
 
-    updateReport = (req: Request, res: Response) => {
+    updateReport = (
+      req: Request,
+      res: Response<{ data: ReportsResponse } | { code: string, message: string}>,
+    ) => {
       const { id } = req.params;
       const {
         data,
@@ -118,7 +133,7 @@ export class ReportsController {
 
         if (!author) {
           return res.status(404).json({
-            errorCode: 'c-001-u-001',
+            code: 'c-001-u-001',
             message: 'Author not found.',
           });
         }
@@ -135,13 +150,16 @@ export class ReportsController {
         });
       }
 
-      res.status(200).json({
+      return res.status(200).json({
         message: 'Report updated successfully.',
         data: response,
       });
     }
 
-    deleteReport = (req: Request, res: Response) => {
+    deleteReport = (
+      req: Request,
+      res: Response<{ code?: string, message: string}>,
+    ) => {
       const { id } = req.params;
 
       const response: any = this.reportService.deleteReport(id);
@@ -155,7 +173,7 @@ export class ReportsController {
         });
       }
 
-      res.status(204).json({
+      return res.status(204).json({
         message: 'Report deleted successfully.',
       });
     }
