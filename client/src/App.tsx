@@ -13,6 +13,7 @@ import { NavBar } from './components';
 
 import './App.css';
 import rootSaga from "./redux/sagas";
+import SocketWorker from "./SocketWorker";
 
 const THEME = createMuiTheme();
 const theStore = store();
@@ -23,6 +24,7 @@ function App() {
     <MuiThemeProvider theme={THEME}>
       <Provider store={theStore}>
         <div className="App">
+          <SocketWorker />
           <NavBar/>
           <Router>
             <Switch>
