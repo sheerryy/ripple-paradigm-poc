@@ -17,7 +17,7 @@ const SocketWorker = () => {
     };
   }, []);
 
-  return null;
+  return <></>;
 };
 
 export default SocketWorker;
