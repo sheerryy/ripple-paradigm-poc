@@ -11,6 +11,8 @@ export type ErrorResponse = {
 };
 
 export type EmitterResponse = {
+    context: string;
+
     requestMethod: EmitterRequestMethod;
 
     data?: {
