@@ -23,11 +23,13 @@ class SocketIoMiddleware {
     });
   }
 
-  socketEmitter = (context: string, response: EmitterResponse) => {
-    this.socketServer.emit(`context/${context}`, response);
+  socketEmitter = (context: string, response: Partial<EmitterResponse>) => {
+    this.socketServer.emit('context/emitter', { ...response, context });
   }
 
-  getEmitterResponse = (requestMethod: EmitterRequestMethod, id?: string): EmitterResponse => {
+  getEmitterResponse = (
+    requestMethod: EmitterRequestMethod, id?: string,
+  ): Partial<EmitterResponse> => {
     switch (requestMethod) {
       case 'POST':
         return { requestMethod };
