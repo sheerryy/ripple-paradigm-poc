@@ -13,12 +13,8 @@
 
     socket.on('connect', () => console.log('connected'))
 
-    socket.on('context/reports', function(msg){
+    socket.on('context/emitter', function(msg){
       console.log('reports', msg);
-    });
-
-    socket.on('context/authors', function(msg){
-      console.log('authors', msg);
     });
 </script>
 </body>
