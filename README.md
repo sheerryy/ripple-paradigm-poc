@@ -21,5 +21,6 @@ AN Implementation of Reactive Paradigm in ReactJS and NodeJS using Redux and Soc
 - Views ⌛
 - API Integration ✅
 - Redux Implementation ✅
+- Web Worker Integration ⌛
 - Socket Middleware Integration ⌛
 - Unit tests ❌
