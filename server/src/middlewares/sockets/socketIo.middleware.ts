@@ -16,7 +16,7 @@ class SocketIoMiddleware {
   socketServer: SocketServer;
 
   /**
-   * constructor will initialize a socket server which will be used for event emission
+   * @description constructor will initialize a socket server which will be used for event emission
    * @param httpServer {HttpServer}
    */
   constructor(httpServer: HttpServer) {
@@ -28,7 +28,7 @@ class SocketIoMiddleware {
   }
 
   /**
-   * This method is a wrapper of emit function of Socket.io Emit function
+   * @description This method is a wrapper of emit function of Socket.io Emit function
    * @param context {String}
    * @param response {Partial<EmitterResponse>}
    */
@@ -37,7 +37,7 @@ class SocketIoMiddleware {
   }
 
   /**
-   * This method will return the data according to the reuqest medthod TODO: move this to utils
+   * @description This method will return the data according to the reuqest medthod TODO: move this to utils
    * @param requestMethod {EmitterRequestMethod}
    * @param id {string}
    */
