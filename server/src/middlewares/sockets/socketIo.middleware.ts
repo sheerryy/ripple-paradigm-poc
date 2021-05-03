@@ -15,6 +15,10 @@ import {
 class SocketIoMiddleware {
   socketServer: SocketServer;
 
+  /**
+   * constructor will initialize a socket server which will be used for event emission
+   * @param httpServer {HttpServer}
+   */
   constructor(httpServer: HttpServer) {
     this.socketServer = new SocketServer(httpServer, {
       cors: {
@@ -23,10 +27,20 @@ class SocketIoMiddleware {
     });
   }
 
+  /**
+   * This method is a wrapper of emit function of Socket.io Emit function
+   * @param context {String}
+   * @param response {Partial<EmitterResponse>}
+   */
   socketEmitter = (context: string, response: Partial<EmitterResponse>) => {
     this.socketServer.emit('context/emitter', { ...response, context });
   }
 
+  /**
+   * This method will return the data according to the reuqest medthod TODO: move this to utils
+   * @param requestMethod {EmitterRequestMethod}
+   * @param id {string}
+   */
   getEmitterResponse = (
     requestMethod: EmitterRequestMethod, id?: string,
   ): Partial<EmitterResponse> => {
@@ -38,6 +52,14 @@ class SocketIoMiddleware {
     }
   }
 
+  /**
+   * @description This method is the main part of this middleware.
+   * It will catch POST', 'PUT', 'PATCH' and 'DELETE' successful requests
+   * and will emit it to Socket server
+   * It uses on 'finish' event which mean it will work after the response is sent
+   * and will not create any delay in the main request
+   * @param context {string} - name of the entity
+   */
   emitterMiddleware = (context: string) => (req: Request, res: Response, next: NextFunction) => {
     res.on('finish', () => {
       if (['POST', 'PUT', 'PATCH', 'DELETE'].indexOf(req.method) !== -1) {
@@ -56,6 +78,7 @@ class SocketIoMiddleware {
 
         const dependentContexts: DependentContext[] = res.locals.dependentContexts || [];
 
+        // This method will emit event for dependent enitities
         // eslint-disable-next-line no-restricted-syntax
         for (const dependentContext of dependentContexts) {
           this.socketEmitter(
