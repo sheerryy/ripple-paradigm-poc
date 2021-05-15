@@ -1,9 +1,9 @@
-import socketIOClient from "socket.io-client";
+import { io } from "socket.io-client";
 
 import { getConfig } from '../../config';
 
 const { SOCKET_ENDPOINT } = getConfig();
 
-const socketClient = socketIOClient(SOCKET_ENDPOINT);
+const socketClient = io(SOCKET_ENDPOINT);
 
 export default socketClient;

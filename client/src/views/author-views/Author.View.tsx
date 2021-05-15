@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import socketIOClient from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { Grid, Paper } from '@material-ui/core';
 
 import { getConfig } from '../../config';
@@ -12,7 +12,7 @@ function AuthorView() {
   useEffect(() => {
     const setListeners = () => {
       console.log('useEffect()')
-      const socketClient = socketIOClient(SOCKET_ENDPOINT);
+      const socketClient = io(SOCKET_ENDPOINT);
       socketClient.on('connect', () => console.log('connected'));
       socketClient.on('context/authors', function(msg: string){
         console.log('authors', msg);
