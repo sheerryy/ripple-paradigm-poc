@@ -1,14 +1,25 @@
-/* eslint-disable no-restricted-globals */
+/* eslint-disable */ /* TODO: enable Eslint after completion */
+
 const SocketIoWorker = () => {
-  debugger
-    importScripts(self.name + 'socket.io/socket.io.js')
-    const socketClient = io('http://127.0.0.1:3001');
+    debugger
+    console.log(`NAME: ${self.name}`)
+
+    try {
+      importScripts('https://cdn.socket.io/3.1.3/socket.io.min.js')
+    } catch(e) {
+      console.error(e)
+    }
+    // @ts-ignore
+  const socketClient = io('http://127.0.0.1:3001');
 
     const onMessage = (e: any) => {
       if (!e) return;
 
+      socketClient.on('connect', () => console.log('connected'))
+
       socketClient.on('context/emitter', function (msg: string) {
-        console.log(msg);
+        // console.log(msg);
+        self.postMessage(msg)
       });
       console.log('Start our long running job...');
       const seconds = 5;
@@ -23,6 +34,7 @@ const SocketIoWorker = () => {
 
       self.postMessage("done");
     }
+
     addEventListener('message', onMessage);
 }
 
