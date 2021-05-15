@@ -144,7 +144,9 @@ function SaveReportForm({
               defaultValue={propReport?.Author.id}
               fullWidth={true}
             >
-              {authors.map((author) => <MenuItem value={author.id}>{author.name}</MenuItem>)}
+              {authors.map((author, authorIndex) => (
+                <MenuItem key={author.id + authorIndex} value={author.id}>{author.name}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>
