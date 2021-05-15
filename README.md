@@ -13,6 +13,7 @@ AN Implementation of Reactive Paradigm in ReactJS and NodeJS using Redux and Soc
 - API Implementation  ✅
 - Socket Implementation  ✅
 - Socket Middleware Implementation  ✅
+- Refactor Code ⌛  
 - Unit Tests ⌛
 
 ### Server
@@ -21,6 +22,7 @@ AN Implementation of Reactive Paradigm in ReactJS and NodeJS using Redux and Soc
 - Views ⌛
 - API Integration ✅
 - Redux Implementation ✅
-- Web Worker Integration ⌛
+- Web Worker Integration ✅
+- Refactor Code ⌛
 - Socket Middleware Integration ⌛
 - Unit tests ❌
