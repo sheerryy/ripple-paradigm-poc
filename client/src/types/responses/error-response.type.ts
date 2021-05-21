@@ -5,5 +5,6 @@ export type ErrorResponse = {
 
   message: string;
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   data?: object;
 };
